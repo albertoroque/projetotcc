@@ -1,29 +1,27 @@
-angular
-
-.module('Proj',[
+angular.module('Proj',[
   	'ngRoute',
     'ngMaterial',
     'ngCookies',
     'ngMessages'
   	])
 
-// .config([
-//     '$routeProvider', '$httpProvider',
-//     function($routeProvider, $httpProvider) {
+.config([
+    '$routeProvider', '$httpProvider',
+    function($routeProvider, $httpProvider) {
 
-//         // Permitindo CORS
-//         $httpProvider.defaults.useXDomain = true;
-//         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        // Permitindo CORS
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-//         $routeProvider
-//             .when('/', {
-//                 redirectTo: '/home'
-//             })
-//             .otherwise({
-//                 redirectTo: '/erro/404'
-//             });
+        $routeProvider
+            .when('/', {
+                redirectTo: '/entrar'
+            })
+            .otherwise({
+                redirectTo: '/erro/404'
+            });
 
-//             }
-//         ])
+            }
+        ])
 
-// .controller('LoginCtrl',[])
+.controller('LoginCtrl',[])
