@@ -17,7 +17,6 @@
     <!-- SIDENAV -->
     
     <md-sidenav 
-        ng-if="logado"      
         class="md-sidenav-left md-whiteframe-2dp"
         md-component-id="left"
         md-disable-backdrop=""              
@@ -32,7 +31,7 @@
           </md-button>
         </div>
       </md-toolbar>
-      <md-content layout-padding >
+      <md-content layout-padding ng-if="logado">
         <md-list class="menu-list">
           <md-list-item ng-click="close()" >
             <i class="fa fa-user"></i>
@@ -54,7 +53,7 @@
       </md-content>
     </md-sidenav>
 
-  <md-content flex="100" layout="column" style="width: 100%; height: 100%; background-color: #efefef;" ng-controller="MenuCtrl">  
+  <md-content flex="100" layout="column" style="width: 100%; height: 100%; background-color: #efefef;">  
     <md-toolbar class="md-hue-2 md-whiteframe-4dp" ng-if="logado"><!--  MENU PRINCIPAL -->
       <div class="md-toolbar-tools">
         <md-button class="md-icon-button" ng-click="toggleLeft()" ng-hide="isOpenLeft()" hide-gt-sm ng-if="logado">

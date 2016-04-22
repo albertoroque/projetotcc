@@ -10,12 +10,12 @@ angular.module('Proj',[
   '$routeProvider', '$httpProvider',
   function($routeProvider, $httpProvider) {
 
-    // Permitindo CORS
+    //Permitindo CORS
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
       $routeProvider
-        .when('/login', {
+        .when('/', {
             redirectTo: '/login'
         })
         .otherwise({
