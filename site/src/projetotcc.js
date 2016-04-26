@@ -3,7 +3,11 @@ angular.module('Proj',[
     'ngMaterial',
     'ngCookies',
     'ngMessages',
-    'proj.login'
+    'proj.login',
+    'proj.erro',
+    'proj.local',
+    'proj.timeline',
+    'proj.perfil'
   	])
 
 .config([
@@ -26,31 +30,16 @@ angular.module('Proj',[
 
 
   
-.controller('MenuCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    
-    $scope.close = function () {
-      $mdSidenav('left').close()
-    };
-
-    $scope.toggleLeft = buildToggler('left');    
-
-    function buildToggler(navID) {
-      return function() {
-        // Component lookup should always be available since we are not using `ng-if`
-        $mdSidenav(navID).toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
-    }
+.controller('MenuCtrl', function ($scope, $rootScope, $timeout, $mdSidenav, $log) {
+       
   })
 
 
-.controller('SocialCtrl', function ($scope) {
+.controller('SocialCtrl', function ($scope, $rootScope) {
         
-  $scope.logado = false;
+  $rootScope.logado = false;
 
-  console.log('carregado');
+  $rootScope.contaLogada = {};
     
 })
 

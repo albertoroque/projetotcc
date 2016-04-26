@@ -6,17 +6,19 @@
         <i class="fa fa-braille fa-lg"></i>            
         Social
       </h2>
+      
       <md-input-container  class="md-block md-icon-float">
         <label class="social-color-white" style="text-shadow: none;">login</label>            
-        <input ng-model="user.title">
+        <input ng-model="user.name">
       </md-input-container>
       <md-input-container class="md-block md-icon-float">
         <label class="social-color-white" style="text-shadow: none;">senha</label>            
-        <input ng-model="user.email" type="password">
+        <input ng-model="user.senha" type="password">
       </md-input-container>
-      <md-button style="background-color: rgba(255,255,255,0.2); color: white;">
+      <md-button style="background-color: rgba(255,255,255,0.2); color: white;" ng-click="logar(user);">
         entrar
       </md-button>       
+
     </div>
   </div>
   <!-- END LOGIN -->

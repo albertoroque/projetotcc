@@ -5,62 +5,22 @@
 
   <title>Projeto TCC</title>
     
-  <link rel="stylesheet" href="comp/angular-material/angular-material.min.css" />  
+  <link rel="stylesheet" href="comp/angular-material/angular-material.min.css" /> 
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic" /> 
   <link rel="stylesheet" type="text/css" href="comp/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="style.css" />
   
 
 </head>
 <body>
-  <md-content layout="row" flex layout-fill>
-
-    <!-- SIDENAV -->
-    
-    <md-sidenav 
-        class="md-sidenav-left md-whiteframe-2dp"
-        md-component-id="left"
-        md-disable-backdrop=""              
-        md-whiteframe="2"
-        >
-      <md-toolbar ng-controller="MenuCtrl"> 
-        <div class="md-toolbar-tools">       
-          <h2 class="md-toolbar-tools">Social</h2>
-          <span flex></span>
-          <md-button class="md-icon-button" hide-gt-sm>
-            <i class="fa fa-angle-left fa-lg"></i>              
-          </md-button>
-        </div>
-      </md-toolbar>
-      <md-content layout-padding ng-if="logado">
-        <md-list class="menu-list">
-          <md-list-item ng-click="close()" >
-            <i class="fa fa-user"></i>
-             Perfil
-          </md-list-item>
-          <md-list-item ng-click="null">
-            <i class="fa fa-users" style="margin-right: 10px;"></i>
-            Amigos
-          </md-list-item>
-          <md-list-item ng-click="null">
-            <i class="fa fa-search" style="margin-right: 10px;"></i>
-            Buscar
-          </md-list-item>
-          <md-list-item ng-click="null">
-            <i class="fa fa-cog" style="margin-right: 10px;"></i>
-            Configuração
-          </md-list-item>
-        </md-list>        
-      </md-content>
-    </md-sidenav>
+<md-content layout="row" flex layout-fill>  
 
   <md-content flex="100" layout="column" style="width: 100%; height: 100%; background-color: #efefef;">  
+    
     <md-toolbar class="md-hue-2 md-whiteframe-4dp" ng-if="logado"><!--  MENU PRINCIPAL -->
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" ng-click="toggleLeft()" ng-hide="isOpenLeft()" hide-gt-sm ng-if="logado">
-          <i class="fa fa-bars fa-lg" ></i>
-        </md-button>
+      <div class="md-toolbar-tools">      
         <h2>
-          <span hide-gt-sm>Social</span>
+          <span>Social</span>
         </h2>
           <span flex></span>          
       </div>
@@ -86,8 +46,18 @@
   <script src="projetotcc.js"></script>
   <script src="app/login/loginCtrl.js"></script>
   <script src="app/login/loginService.js"></script>
+  <script src="app/erro/erroCtrl.js"></script>
+  <script src="app/erro/erroService.js"></script>
+
+  <script src="app/local/localCtrl.js"></script>
+  <script src="app/local/localService.js"></script>
+
+  <script src="app/perfil/perfilCtrl.js"></script>
+  <script src="app/perfil/perfilService.js"></script>
   
-  
+  <script src="app/timeline/timelineCtrl.js"></script>
+  <script src="app/timeline/timelineService.js"></script>
+
 </body>
 </html>
 
@@ -95,3 +65,4 @@
 Copyright 2016 Google Inc. All Rights Reserved. 
 Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
 -->
+
