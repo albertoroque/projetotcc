@@ -1,0 +1,24 @@
+<!-- LOGIN -->
+  <div flex style="background-color: #eaebef;" md-theme="default">
+    <div layout="column" layout-align="center center" class="container"> 
+      
+      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{contaLogada.avatar}}');"></div>
+      
+      <h4 class="md-display-1 text-center"> 
+        Bem-vindo ao Social <br>
+        {{ contaLogada.nome }}
+      </h4>
+
+      <md-button class="md-primary md-raised " ng-click="adicionarLocal();"> 
+        <i class="fa fa-map-marker fa-lg"></i>
+         adicionar localização
+      </md-button>
+
+      <md-button class="md-primary " ng-click="goperfil();"> 
+        <i class="fa fa-user fa-lg"></i>
+         ir para perfil
+      </md-button>
+      
+    </div>
+  </div>
+  <!-- END LOGIN -->
