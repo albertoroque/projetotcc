@@ -1,15 +1,23 @@
-<!-- LOGIN -->
-  <div flex style="background-color: red;">
-    <div layout="column" class="login-form" md-theme="docs-dark"> 
+<!-- PERFIL -->
+<div flex ng-init="carregaPerfil()">
+  <div layout="row" layout-align="center center" class="container" layout-wrap> 
 
-      <h2 class="md-display-2 social-color-white text-center">
-        <i class="fa fa-braille fa-lg"></i>            
-        Social
-      </h2>
+    <div flex="100" layout="column" layout-align="center
+    center">
+      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>
+      <h4 class="text-center"> 
+        {{ dadosPerfil.nome }}                
+      </h4>
+      <p class="text-center">
+        {{ dadosPerfil.localFormatado }}
+      </p>
       
-      
-      <h1 class="md-display-3 social-color-white text-center">ERRO 404</h1>     
+    </div>  
+
+    <div style="width: 100%;">
 
     </div>
+
   </div>
-  <!-- END LOGIN -->
+</div>
+  <!-- END PERFIL -->

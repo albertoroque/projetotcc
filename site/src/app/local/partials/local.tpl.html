@@ -1,5 +1,6 @@
 <!-- LOGIN -->
   <div flex style="background-color: #eaebef;" md-theme="default">
+    
     <div layout="column" layout-align="center center" class="container"> 
       
       <div class="avatar md-whiteframe-3dp" style="background-image: url('{{contaLogada.avatar}}');"></div>
@@ -9,16 +10,15 @@
         {{ contaLogada.nome }}
       </h4>
 
-      <md-button class="md-primary md-raised " ng-click="adicionarLocal();"> 
+      <md-button class="md-primary md-raised " ng-click="getLocation();"> 
         <i class="fa fa-map-marker fa-lg"></i>
          adicionar localização
       </md-button>
 
-      <md-button class="md-primary " ng-click="goperfil();"> 
-        <i class="fa fa-user fa-lg"></i>
+      <md-button class="md-primary " ng-href="{{ contaLogada.rota }}">
          ir para perfil
-      </md-button>
-      
+      </md-button>     
+
     </div>
   </div>
   <!-- END LOGIN -->

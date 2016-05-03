@@ -60,8 +60,7 @@ angular.module('proj.login', ['ngRoute','ngAnimate'])
 
       $rootScope.contaLogada.nome = 'Alberto';
       $rootScope.contaLogada.avatar = 'https://lh3.googleusercontent.com/5pySG2VRXgi2JwvbolQmod2D9by_Q2DXymR4O9ErqYXD4K1GrswdGAd78SI1LJozAYnmOqgITw=w2324-h1307-rw-no';
-      $rootScope.contaLogada.rota = 'perfil/'+'alberto';
-
+      $rootScope.contaLogada.rota = '#/perfil/'+'alberto';
     }
 
   }
