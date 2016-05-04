@@ -1,5 +1,5 @@
 
-angular.module('proj.login', ['ngRoute','ngAnimate'])
+angular.module('proj.login', [])
 
 .config(function($routeProvider) {
 
@@ -46,22 +46,46 @@ angular.module('proj.login', ['ngRoute','ngAnimate'])
       .accentPalette('pink');
   })
 
- 
+.factory("Auth", [
+  "$cookieStore", function($cookieStore) {
+    var conta = {};
+    return {
+      set: function(conta) {
+        conta = conta;
+        $cookieStore.put("conta", conta);
+      },
+      get: function() {
+        conta = $cookieStore.get("conta");
+        return conta;
+      },
+      clear: function() {
+        conta = {};
+        conta.isLogado = false;
+        $cookieStore.remove("conta");
+      }
+    }
+  }
+])
 
-.controller('LoginCtrl', function ($scope, $rootScope, $location) {        
+.controller('LoginCtrl', function ($scope, $rootScope, $location, Auth) {        
   
+  var dadosConta = {};
 
   $scope.logar = function(user){
     
-
     if(user.name == 'alberto' && user.senha == '123456'){
+      
+      dadosConta.nome = 'Alberto';
+      dadosConta.avatar = 'https://lh3.googleusercontent.com/5pySG2VRXgi2JwvbolQmod2D9by_Q2DXymR4O9ErqYXD4K1GrswdGAd78SI1LJozAYnmOqgITw=w2324-h1307-rw-no';
+      dadosConta.rota = '#/perfil/'+'alberto';
+      dadosConta.isLogado = true;
+      dadosConta.placeId = 0;
+
+      Auth.set(dadosConta);
+
       $location.path('/local');
-      $rootScope.logado = true;
-
-      $rootScope.contaLogada.nome = 'Alberto';
-      $rootScope.contaLogada.avatar = 'https://lh3.googleusercontent.com/5pySG2VRXgi2JwvbolQmod2D9by_Q2DXymR4O9ErqYXD4K1GrswdGAd78SI1LJozAYnmOqgITw=w2324-h1307-rw-no';
-      $rootScope.contaLogada.rota = '#/perfil/'+'alberto';
+      
+      $rootScope.logado = true;      
     }
-
   }
 })

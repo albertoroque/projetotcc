@@ -28,6 +28,64 @@ angular.module('Proj',[
     }
   ])
 
+.service("LocalFactory", function(){
+  
+    return{
+      getLocation: function(){
+                
+        if (navigator.geolocation) {
+          return navigator.geolocation.getCurrentPosition(codeLatLng, showError);       
+        } else { 
+          alert ("Geolocation is not supported by this browser.");
+        }
+      }
+    }
+
+    function codeLatLng(position)
+    {
+      var geocoder = new google.maps.Geocoder();
+    
+      var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      geocoder.geocode({'latLng': latlng}, function(results, status)
+      {
+        if (status == google.maps.GeocoderStatus.OK)
+        {         
+          if (results[0])
+          {                 
+            console.log(results[0].place_id);
+            return results[0].place_id;                               
+          }
+          else
+          {
+             return "A pesquisa não obteve resultados";
+          }
+        }
+        else
+        {           
+          return "Geocoder failed due to: " + status;
+        }
+      });
+    }
+
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          return "Permissão negada!"
+          break;
+        case error.POSITION_UNAVAILABLE:
+          return "O local informado parece não ser real"
+          break;
+        case error.TIMEOUT:
+          return "Ops, algum erro aconteceu, verifique sua internet"
+          break;
+        case error.UNKNOWN_ERROR:
+          return "Ops, algum erro aconteceu"
+          break;
+      }
+    }
+})
+
 
   
 .controller('MenuCtrl', function ($scope, $rootScope, $timeout, $mdSidenav, $log) {
@@ -35,7 +93,7 @@ angular.module('Proj',[
   })
 
 
-.controller('SocialCtrl', function ($scope, $rootScope) {
+.controller('SocialCtrl', function ($scope, $rootScope, Auth) {
         
   $rootScope.logado = false;
 

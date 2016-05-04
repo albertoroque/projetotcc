@@ -13,13 +13,19 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 })
 
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $location) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $location, Auth) {        
 
 	$scope.dadosPerfil = {};
 
 	$scope.carregaPerfil= function(){
-		$scope.dadosPerfil = $rootScope.contaLogada;
-		$scope.dadosPerfil.localFormatado = $scope.buscaLocal($scope.dadosPerfil.placeId);	
+		$scope.dadosPerfil = Auth.get();
+
+		console.log($scope.dadosPerfil);
+
+		if(!$scope.dadosPerfil.isLogado){
+			alert('Você não está logado!');
+			$location.path('/login');
+		}			
 	}
 
 	$scope.buscaLocal = function(placeId){
@@ -27,21 +33,20 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 			    
 	    geocoder.geocode({'placeId': placeId}, function(results, status)
 	    {
-        if (status == google.maps.GeocoderStatus.OK)
-        {	        
-          if (results[0])
-          {          	
-          	console.log(results[0].formatted_address);
-          	$scope.dadosPerfil.localFormatado = results[0].formatted_address;
-
-          }else{
-          	return 'Ocorreu um erro inesperado!'
-          }
-        }
-        else
-        {	        	
-          return 'Ocorreu um erro inesperado!'
-        }
+	      if (status == google.maps.GeocoderStatus.OK)
+	      {	        
+					if (results[0])
+					{          	
+						var local = results[0].formatted_address;
+						return local;
+					}else{
+						return 'Ocorreu um erro inesperado!'
+					}
+		    }
+	      else
+	      {	        	
+	        return 'Ocorreu um erro inesperado!'
+	      }
 	    });
 	}
 

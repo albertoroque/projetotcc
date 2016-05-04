@@ -8,8 +8,11 @@
       <h4 class="text-center"> 
         {{ dadosPerfil.nome }}                
       </h4>
-      <p class="text-center">
-        {{ dadosPerfil.localFormatado }}
+      <md-button ng-if="dadosPerfil.placeId == 0">
+        adicionar local
+      </md-button>
+      <p class="text-center" ng-if="dadosPerfil.placeId != 0">
+        {{ buscaLocal(dadosPerfil.placeId) }}
       </p>
       
     </div>  

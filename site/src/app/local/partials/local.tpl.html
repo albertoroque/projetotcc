@@ -1,21 +1,29 @@
 <!-- LOGIN -->
-  <div flex style="background-color: #eaebef;" md-theme="default">
+  <div flex style="background-color: #eaebef;" md-theme="default" ng-init="carregaPagina()">
     
+    <md-toolbar class="md-hue-2 md-whiteframe-4dp">
+      <div class="md-toolbar-tools">      
+        <h2>
+          <span>Social</span>
+        </h2>
+          <span flex></span>          
+      </div>
+    </md-toolbar>
+
     <div layout="column" layout-align="center center" class="container"> 
       
-      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{contaLogada.avatar}}');"></div>
+      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>
       
-      <h4 class="md-display-1 text-center"> 
-        Bem-vindo ao Social <br>
-        {{ contaLogada.nome }}
+      <h4 class="md-title text-center"> 
+        Adicione a sua localização ao seu perfil!
       </h4>
 
-      <md-button class="md-primary md-raised " ng-click="getLocation();"> 
+      <md-button class="md-primary md-raised " ng-click="getLocation()"> 
         <i class="fa fa-map-marker fa-lg"></i>
          adicionar localização
       </md-button>
 
-      <md-button class="md-primary " ng-href="{{ contaLogada.rota }}">
+      <md-button class="md-primary " ng-href="{{ dadosPerfil.rota }}">
          ir para perfil
       </md-button>     
 
