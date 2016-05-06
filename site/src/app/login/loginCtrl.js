@@ -77,7 +77,7 @@ angular.module('proj.login', [])
       
       dadosConta.nome = 'Alberto';
       dadosConta.avatar = 'https://lh3.googleusercontent.com/5pySG2VRXgi2JwvbolQmod2D9by_Q2DXymR4O9ErqYXD4K1GrswdGAd78SI1LJozAYnmOqgITw=w2324-h1307-rw-no';
-      dadosConta.rota = '#/perfil/'+'alberto';
+      dadosConta.rota = '/perfil/'+'alberto';
       dadosConta.isLogado = true;
       dadosConta.placeId = 0;
 

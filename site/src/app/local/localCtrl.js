@@ -1,5 +1,5 @@
 
-angular.module('proj.local', ['ngRoute'])
+angular.module('proj.local', [])
 
 .config(function($routeProvider) {
 
@@ -11,10 +11,11 @@ angular.module('proj.local', ['ngRoute'])
 })
 
 
-.controller('LocalCtrl', function ($scope, $rootScope, $location, Auth) {        
+.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth) {        
   
 	
 	$scope.dadosPerfil = {};
+    $scope.carregando = false;
 
 	var geocoder = new google.maps.Geocoder;
 
@@ -27,13 +28,43 @@ angular.module('proj.local', ['ngRoute'])
 	}
 
 	$scope.buscaLocal =  function(){
+        console.log('disparada a busca de localização');
 		getLocation();
+        $scope.carregando = true;
 	}
 
 	function cookieLocal(local){		
-		$location.path($scope.dadosPerfil.rota);
-		$scope.dadosPerfil.placeId = local.place_id;
-		Auth.set($scope.dadosPerfil);
+		//$location.path($scope.dadosPerfil.rota);
+        if(local.place_id != null){
+            $scope.dadosPerfil.placeId = local.place_id;
+            Auth.set($scope.dadosPerfil);        
+            $location.path('perfil/alberto');
+            console.log(Auth.get().rota);        
+
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.body))
+                .clickOutsideToClose(true)
+                .title('Localização encontrada')
+                .textContent('Seu perfil contém as informações do seu local para que outros amigos te achem!')
+                .ariaLabel('Ok Localização')
+                .ok('ok')    
+            );
+
+
+        }else{
+            $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.body))
+                .clickOutsideToClose(true)
+                .title('Ops')
+                .textContent('Você pode ter esquecido de usar sua localização. Tente novamente!')
+                .ariaLabel('Erro Localização')
+                .ok('ok')
+                .targetEvent(ev)
+            );
+            
+        }		
 	}
 
    
@@ -46,10 +77,12 @@ angular.module('proj.local', ['ngRoute'])
     }
 
     function showPosition(position) {
+        console.log('buscando...');
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
+                    console.log('achei!');
                 	cookieLocal(results[0]);
                 }
             } else {

@@ -13,12 +13,15 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 })
 
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $location, Auth) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $location, $timeout, $q, Auth) {        
 
 	$scope.dadosPerfil = {};
 
 	$scope.carregaPerfil= function(){
+		
 		$scope.dadosPerfil = Auth.get();
+
+		$scope.dadosPerfil.local = convertePlaceIdw($scope.dadosPerfil.placeId);
 
 		console.log($scope.dadosPerfil);
 
@@ -28,21 +31,22 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 		}			
 	}
 
-	$scope.buscaLocal = function(placeId){
-		geocoder = new google.maps.Geocoder();
+	function convertePlaceIdw(placeId){
+		var geocoder = new google.maps.Geocoder();
 			    
 	    geocoder.geocode({'placeId': placeId}, function(results, status)
 	    {
 	      if (status == google.maps.GeocoderStatus.OK)
 	      {	        
-					if (results[0])
-					{          	
-						var local = results[0].formatted_address;
-						return local;
-					}else{
-						return 'Ocorreu um erro inesperado!'
-					}
-		    }
+			if (results[0])
+			{   
+				console.log(results[0].formatted_address);
+				return results[0].formatted_address;				
+			}else{
+
+				return 'Ocorreu um erro inesperado!'
+			}
+		  }
 	      else
 	      {	        	
 	        return 'Ocorreu um erro inesperado!'
@@ -50,8 +54,21 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 	    });
 	}
 
-	$scope.isMaster = function(){
+	function convertePlaceId(placeId) {
+		return 'Alameda';
+	  // return function() {
+	  //   var defer = $q.defer()
 
+	  //   // simulated async function
+	  //   $timeout(function() {
+	  //     if(true) {
+	  //       defer.resolve(placeId)
+	  //     } else {
+	  //       defer.reject('erro')
+	  //     }
+	  //   }, 2000)
+	  //   return defer.promise
+	  // }
 	}
   
 })

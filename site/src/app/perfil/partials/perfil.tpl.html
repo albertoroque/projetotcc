@@ -5,22 +5,22 @@
     <div flex="100" layout="column" layout-align="center
     center">
       <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>
-      <h4 class="text-center"> 
+      <h4 class="text-center md-display-1" style="margin-bottom: 5px;"> 
         {{ dadosPerfil.nome }}                
       </h4>
       <md-button ng-if="dadosPerfil.placeId == 0">
         adicionar local
       </md-button>
       <p class="text-center" ng-if="dadosPerfil.placeId != 0">
-        {{ buscaLocal(dadosPerfil.placeId) }}
+        {{ dadosPerfil.local }}
       </p>
       
     </div>  
 
     <div style="width: 100%;">
-
+      <h4 class="md-title text-center">POSTS</h4>
     </div>
 
   </div>
 </div>
-  <!-- END PERFIL -->
+<!-- END PERFIL -->
