@@ -3,13 +3,16 @@
 
     
     <md-toolbar class="md-hue-2 md-whiteframe-4dp">
+    <div style="width: 100%; max-width: 880px; margin: 0 auto;">
       <div class="md-toolbar-tools">      
         <h2>
-          <span>Social</span>
+          <span> <i class="fa fa-braille fa-lg"></i> Social</span>
         </h2>
-          <span flex></span>          
+        <span flex></span>          
       </div>
-    </md-toolbar>
+    </div>
+  </md-toolbar>
+
 
     <md-progress-linear md-mode="indeterminate" ng-show="$parent.carregando"></md-progress-linear>
 
@@ -22,7 +25,7 @@
         <i class="fa fa-map-marker fa-lg"></i>
          adicionar localização
       </md-button>
-      <md-button class="md-primary " ng-href="{{ dadosPerfil.rota }}">
+      <md-button class="md-primary" ng-click="goto(dadosPerfil.rota);">
          ir para perfil
       </md-button>      
       

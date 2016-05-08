@@ -21,12 +21,15 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 		
 		$scope.dadosPerfil = Auth.get();
 
-		$scope.dadosPerfil.local = convertePlaceIdw($scope.dadosPerfil.placeId);
-
 		console.log($scope.dadosPerfil);
 
-		if(!$scope.dadosPerfil.isLogado){
-			alert('Você não está logado!');
+		if($scope.dadosPerfil.placeId == 0){
+
+		}else{
+			$scope.dadosPerfil.local = convertePlaceIdw($scope.dadosPerfil.placeId);
+		}			
+
+		if(!$scope.dadosPerfil.isLogado){			
 			$location.path('/login');
 		}			
 	}
@@ -40,7 +43,11 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 	      {	        
 			if (results[0])
 			{   
-				console.log(results[0].formatted_address);
+				var icon = '<i class="fa fa-map-marker fa-lg"></i>';
+				var bairro = results[0].address_components[1].long_name;
+				var cidade = results[0].address_components[2].long_name;
+				console.log(results[0]);
+				document.getElementById("local").innerHTML = icon +' '+ bairro + ', ' + cidade;
 				return results[0].formatted_address;				
 			}else{
 
@@ -54,21 +61,9 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 	    });
 	}
 
-	function convertePlaceId(placeId) {
-		return 'Alameda';
-	  // return function() {
-	  //   var defer = $q.defer()
-
-	  //   // simulated async function
-	  //   $timeout(function() {
-	  //     if(true) {
-	  //       defer.resolve(placeId)
-	  //     } else {
-	  //       defer.reject('erro')
-	  //     }
-	  //   }, 2000)
-	  //   return defer.promise
-	  // }
-	}
+	$scope.logout = function(){
+		Auth.clear();
+		$location.path('/login');
+	};
   
 })

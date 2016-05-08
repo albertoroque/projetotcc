@@ -27,6 +27,7 @@ angular.module('Proj',[
         });
     }
   ])
+
   
 .controller('MenuCtrl', function ($scope, $rootScope, $timeout, $mdSidenav, $log) {
        
@@ -34,11 +35,8 @@ angular.module('Proj',[
 
 
 .controller('SocialCtrl', function ($scope, $rootScope, Auth) {
-        
-  $rootScope.logado = false;
+          
 
-  $rootScope.contaLogada = {};
-    
 })
 
  

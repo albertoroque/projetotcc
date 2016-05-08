@@ -76,8 +76,9 @@ angular.module('proj.login', [])
     if(user.name == 'alberto' && user.senha == '123456'){
       
       dadosConta.nome = 'Alberto';
-      dadosConta.avatar = 'https://lh3.googleusercontent.com/5pySG2VRXgi2JwvbolQmod2D9by_Q2DXymR4O9ErqYXD4K1GrswdGAd78SI1LJozAYnmOqgITw=w2324-h1307-rw-no';
+      dadosConta.avatar = 'https://igcdn-photos-a-a.akamaihd.net/hphotos-ak-xtp1/t51.2885-19/1538488_366762720187592_734801239_a.jpg';
       dadosConta.rota = '/perfil/'+'alberto';
+      dadosConta.totalPublicacoes = 75;
       dadosConta.isLogado = true;
       dadosConta.placeId = 0;
 
@@ -86,6 +87,8 @@ angular.module('proj.login', [])
       $location.path('/local');
       
       $rootScope.logado = true;      
+    }else{
+      $scope.erro = 'usuário ou senha inválido';
     }
   }
 })

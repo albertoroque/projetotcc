@@ -33,6 +33,10 @@ angular.module('proj.local', [])
         $scope.carregando = true;
 	}
 
+    $scope.goto = function(page){
+        $location.path(page);
+    }
+
 	function cookieLocal(local){		
 		//$location.path($scope.dadosPerfil.rota);
         if(local.place_id != null){
@@ -45,8 +49,8 @@ angular.module('proj.local', [])
               $mdDialog.alert()
                 .parent(angular.element(document.body))
                 .clickOutsideToClose(true)
-                .title('Localização encontrada')
-                .textContent('Seu perfil contém as informações do seu local para que outros amigos te achem!')
+                .title('LOCALIZAÇÃO PRONTA')
+                .textContent('Seu perfil contém as informações do seu local para que outros amigos te achem com mais facilidade')
                 .ariaLabel('Ok Localização')
                 .ok('ok')    
             );

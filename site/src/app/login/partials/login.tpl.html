@@ -15,9 +15,12 @@
         <label class="social-color-white" style="text-shadow: none;">senha</label>            
         <input ng-model="user.senha" type="password">
       </md-input-container>
+
+      <p class="text-center" style="color: red;">{{ erro }}</p>
+
       <md-button style="background-color: rgba(255,255,255,0.2); color: white;" ng-click="logar(user);">
         entrar
-      </md-button>       
+      </md-button>  
 
     </div>
   </div>

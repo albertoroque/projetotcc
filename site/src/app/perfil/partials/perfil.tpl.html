@@ -1,26 +1,73 @@
-<!-- PERFIL -->
 <div flex ng-init="carregaPerfil()">
-  <div layout="row" layout-align="center center" class="container" layout-wrap> 
+  
+  <md-toolbar class="md-hue-2 md-whiteframe-4dp">
+    <div style="width: 100%; max-width: 880px; margin: 0 auto;">
+      <div class="md-toolbar-tools">      
+        <h2>
+          <span> <i class="fa fa-braille fa-lg"></i> Social</span>
+        </h2>
+        <span flex></span>          
+        <md-menu>
+          <md-button aria-label="Opções" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <i class="fa fa-ellipsis-v fa-lg"></i> 
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="">
+                <i class="fa fa-user  " style="margin-right: 7px;"></i>
+                Perfil
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="logout()">
+                <i class="fa fa-power-off " style="margin-right: 7px;"></i>
+                Logout
+              </md-button>                            
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </div>
+  </md-toolbar>
 
-    <div flex="100" layout="column" layout-align="center
-    center">
-      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>
-      <h4 class="text-center md-display-1" style="margin-bottom: 5px;"> 
-        {{ dadosPerfil.nome }}                
-      </h4>
-      <md-button ng-if="dadosPerfil.placeId == 0">
-        adicionar local
-      </md-button>
-      <p class="text-center" ng-if="dadosPerfil.placeId != 0">
-        {{ dadosPerfil.local }}
-      </p>
-      
+  <div class="container"> 
+
+  <!-- DADOS PERFIL -->
+    <div flex="100" layout="row" layout-align="start center">
+
+      <!-- avatar -->
+      <div flex="30" flex-xs="40">      
+        <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}'); height: 130px;width: 130px;"></div>      
+      </div>
+
+      <!-- data -->
+      <div flex="70" flex-xs="60">
+        <h4 class="md-display-1" style="margin-bottom: 5px;"> 
+          {{ dadosPerfil.nome }}                
+        </h4>
+
+        <!-- adicionar local caso não exista -->
+        <md-button class="md-primary" ng-if="dadosPerfil.placeId == 0" ng-href="#/local" style="margin: 0px;">
+          adicionar local
+        </md-button>
+
+        <!-- actions -->        
+        <p id="local" ng-if="dadosPerfil.placeId != 0">          
+          <i class="fa fa-map-marker fa-lg"></i>          
+        </p>                   
+        <p> {{ dadosPerfil.totalPublicacoes }} publicações</p>                  
+
+        <md-button class="md-raised md-primary">
+          <i class="fa fa-plus fa-lg"></i>
+          <i class="fa fa-camera fa-lg"></i>
+        </md-button>      
+      </div>
     </div>  
 
     <div style="width: 100%;">
-      <h4 class="md-title text-center">POSTS</h4>
+      
     </div>
 
   </div>
 </div>
-<!-- END PERFIL -->
+<!-- END PERFIL
