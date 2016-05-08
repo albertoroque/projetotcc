@@ -27,6 +27,5 @@ C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.WebPages.xml
 C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.WebPages.Deployment.xml
 C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.WebPages.Razor.xml
 C:\Projetos\projetotcc\service\uploader\uploader\bin\Antlr3.Runtime.pdb
-C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.csprojResolveAssemblyReference.cache
 C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.dll
 C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.pdb
