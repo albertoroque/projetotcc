@@ -65,8 +65,16 @@
       </div>
     </div>  
 
-    <div style="width: 100%;">
+    <div flex class="container" style="background-color:; min-height: 300px;">
       
+      <md-grid-list md-cols="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="4px" md-gutter-gt-sm="4px">
+
+        <!-- repeat de imagens -->
+        <md-grid-tile ng-repeat="t in images track by $index" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" style="background-image: url('{{ t.bk }}'); background-size: cover;">            
+        </md-grid-tile>
+
+      </md-grid-list>
+
     </div>
 
   </div>

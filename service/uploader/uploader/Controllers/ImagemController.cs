@@ -33,11 +33,9 @@ namespace uploader.Controllers
                 {
                     
                     foreach (string file in httpRequest.Files)
-                    {
-                        //pega arquivo
+                    {                 
                         var postedFile = httpRequest.Files[file];
-
-                        //pega extensão
+                 
                         string extension = System.IO.Path.GetExtension(postedFile.FileName).Trim().ToLower();
                                                
                         if (!extension.Equals(".jpg") && !extension.Equals(".png"))
@@ -54,16 +52,14 @@ namespace uploader.Controllers
 
                             postedFile.SaveAs(filePath);
 
-                            result = HttpContext.Current.Request.Url.Authority + "/img/" + filename;
+                            result = "http://" + HttpContext.Current.Request.Url.Authority + "/img/" + filename;
                         }                                                
-                    }
-                    
+                    }                    
                 }
                 else
                 {
                     result = "404";
                 }
-
                 return result;
             }
             catch

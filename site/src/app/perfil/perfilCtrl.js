@@ -1,5 +1,5 @@
 
-angular.module('proj.perfil', ['ngRoute','ngMaterial'])
+angular.module('proj.perfil', [])
 
 .config(function($routeProvider) {
 
@@ -12,72 +12,19 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
     
 })
 
-.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-            
-            element.bind('change', function(){
-                scope.$apply(function(){
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}])
-
-.service('MultimidiaService', function ($http, $q) {
-    
-    return {
-    	upload: function(data) {
-
-    	var d = $q.defer(),
-	        fd = new FormData(),	        
-	        url = 'http://localhost:63349/api/upload',
-	        files = data.files,                    
-	        $this = this;	              	   
-
-        // var file = data.files[0];
-
-        console.log(files);
-
-        for (var i = 0; i < files.length; i++) {
-
-            fd.append("file" + i, files[i]);
-        }                 
-
-        $.ajax({
-	        type: 'POST',
-	        url: url,
-	        data: fd,
-	        contentType: false,
-	        processData: false,
-	        cache: false,
-	        
-	        success: function(dados) {	            
-	            d.resolve(dados);
-	        },
-	        error: function(dados) {
-	            d.reject(dados);
-	        }
-	    });
-      
-	    return d.promise;
-	}
-}
-    
-})
-
 
 //https://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
 //http://jsfiddle.net/JeJenny/ZG9re/
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $location, $timeout, $q, Auth, MultimidiaService) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $location, $timeout, $q, Auth, PerfilService) {        
 
 	$scope.dadosPerfil = {};
 
+	$scope.images = [];
+	var it = {};
+	
+
+	// CARREGA PERFIL DO USUÁRIO PELA ROTA
 	$scope.carregaPerfil= function(){
 		
 		$scope.dadosPerfil = Auth.get();
@@ -92,9 +39,23 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 
 		if(!$scope.dadosPerfil.isLogado){			
 			$location.path('/login');
-		}			
+		}
+
+		for (var j=0; j<5; j++) {
+		  it.bk = "http://localhost:63349/img/33d677a6bd9d4b9b9301557a1b8a0749.jpg";
+		  $scope.images.push(it);		
+		}
+
+		console.log($scope.images);			
 	}
 
+
+
+	/*
+	*
+	*
+	*
+	**/
 	function convertePlaceIdw(placeId){
 		var geocoder = new google.maps.Geocoder();
 			    
@@ -122,24 +83,30 @@ angular.module('proj.perfil', ['ngRoute','ngMaterial'])
 	    });
 	}
 
+
 	$scope.logout = function(){
 		Auth.clear();
 		$location.path('/login');
 	};
 
 	/**
-     * Função que realiza o upload das imagesn para avatar e wallpaper
+     * Função que realiza o upload das imagens
      * @param {[[Type]]} element        [[Description]]
-     * @param {String} scopeAttribute Variável de $scope a ser alterada
+    	
      */
     $scope.uploadDeImagem = function(element) {
         
         console.log("Carregando multimídia");
 
-        MultimidiaService.upload(element)
+        PerfilService.upload(element)
             .then(function(multimidia) {
-            	console.log(multimidia);                
-                alert(multimidia);
+
+            	console.log(multimidia);
+            	var im = {};
+            	im.bk = multimidia;
+            	$scope.images.push(im);
+            	console.log($scope.images);                
+
             })
             .catch(function(retorno) {
                 alert('ERRO');
