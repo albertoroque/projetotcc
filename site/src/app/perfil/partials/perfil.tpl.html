@@ -57,10 +57,11 @@
         </p>                   
         <p> {{ dadosPerfil.totalPublicacoes }} publicações</p>                  
 
-        <md-button class="md-raised md-primary">
+        <md-button class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()">
           <i class="fa fa-plus fa-lg"></i>
           <i class="fa fa-camera fa-lg"></i>
-        </md-button>      
+        </md-button>   
+        <input style="display: none" type="file" id="btn-upload" onchange="angular.element(this).scope().uploadDeImagem(this);" />                
       </div>
     </div>  
 

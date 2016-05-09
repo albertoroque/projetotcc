@@ -29,3 +29,7 @@ C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.WebPages.Razor.x
 C:\Projetos\projetotcc\service\uploader\uploader\bin\Antlr3.Runtime.pdb
 C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.dll
 C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.pdb
+C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.Cors.dll
+C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.Http.Cors.dll
+C:\Projetos\projetotcc\service\uploader\uploader\bin\System.Web.Http.Cors.xml
+C:\Projetos\projetotcc\service\uploader\uploader\obj\Debug\uploader.csprojResolveAssemblyReference.cache
