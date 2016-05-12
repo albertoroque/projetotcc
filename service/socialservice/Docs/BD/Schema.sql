@@ -46,9 +46,7 @@ CREATE TABLE IF NOT EXISTS `Post` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_Post_User`
     FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `User` (`id`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
