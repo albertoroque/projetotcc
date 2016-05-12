@@ -23,7 +23,7 @@ USE `ProjetoTcc` ;
 -- Table `User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `User` (
-  `id` BIGINT(20) GENERATED ALWAYS AS (),
+  `id` BIGINT(20) NOT NULL,
   `username` VARCHAR(70) NOT NULL,
   `password` VARCHAR(45) NULL,
   `fbid` BIGINT(20) NULL,
@@ -40,7 +40,7 @@ SHOW WARNINGS;
 -- Table `Post`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Post` (
-  `id` BIGINT(20) GENERATED ALWAYS AS () VIRTUAL,
+  `id` BIGINT(20) NOT NULL,
   `idUser` BIGINT(20) NOT NULL,
   `url` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
