@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ProjetoTcc
 {
@@ -10,7 +11,9 @@ namespace ProjetoTcc
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            //CORS
+            EnableCorsAttribute corsAttribute = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(corsAttribute);
             // Web API routes
             config.MapHttpAttributeRoutes();
 

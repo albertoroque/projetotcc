@@ -29,7 +29,6 @@ C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.We
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\Antlr3.Runtime.pdb
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.dll
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.pdb
-C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.csprojResolveAssemblyReference.cache
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\ProjetoTcc.dll.config
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\ProjetoTcc.dll
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\ProjetoTcc.pdb
@@ -64,3 +63,8 @@ C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\Antlr
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.csprojResolveAssemblyReference.cache
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.dll
 C:\Projetos\TCC\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.pdb
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\EntityFramework.dll
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\EntityFramework.xml
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Cors.dll
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Http.Cors.dll
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Http.Cors.xml
