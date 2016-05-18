@@ -28,7 +28,7 @@ namespace ProjetoTcc.Controllers
 
                     var social = new Social();
                     var result = social.CriarUsuario(user);
-                    return Request.CreateResponse(HttpStatusCode.Created, new UserDto( user.Obter(result.id)));
+                    return Request.CreateResponse(HttpStatusCode.Created, new UserDto(user.Obter(result.id)));
 
                 }
                 return Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, "Campos incorretos.");
@@ -37,7 +37,7 @@ namespace ProjetoTcc.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
-            
+
         }
 
         [HttpPut]
@@ -72,7 +72,7 @@ namespace ProjetoTcc.Controllers
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
         }
@@ -95,7 +95,7 @@ namespace ProjetoTcc.Controllers
                 }
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
-            
+
         }
 
         [HttpGet]
@@ -141,5 +141,28 @@ namespace ProjetoTcc.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
+
+
+        [HttpPost]
+        [Route("~/projetotcc/api/autenticar")]
+        public HttpResponseMessage Autenticar(ProjetoTcc.Helpers.Autenticar auth)
+        {
+            try
+            {
+                var result = new User().AutenticarUsuario(auth.username, auth.password);
+
+                if (result.Item3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, new UserDto(result.Item1));
+                }
+                return Request.CreateResponse(HttpStatusCode.NotFound, result.Item2);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+
     }
 }
