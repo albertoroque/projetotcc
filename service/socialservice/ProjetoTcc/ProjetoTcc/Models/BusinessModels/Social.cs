@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ProjetoTcc.Helpers.Extensions;
 
 namespace ProjetoTcc.Models.BusinessModels
 {
@@ -21,7 +22,7 @@ namespace ProjetoTcc.Models.BusinessModels
                 var newUser = new User()
                 {
                     username = user.username,
-                    password = user.password,
+                    password = user.password.ToMD5(),
                     avatar = user.avatar,
                     fbid = user.fbid
                 };

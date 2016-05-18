@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Data;
+using ProjetoTcc.Helpers.Extensions;
 
 namespace ProjetoTcc.Models.BusinessModels
 {
@@ -51,7 +52,21 @@ namespace ProjetoTcc.Models.BusinessModels
                 
                 throw ex;
             }
-        } 
+        }
+
+        public Tuple<User, string, bool> AutenticarUsuario(string username, string password)
+        {
+            password = password.ToMD5();
+            var userRepository = new UserRepository(bd);
+            var user = userRepository.Obter(model => model.username.Equals(username) && model.password.Equals(password)).FirstOrDefault();
+            if (user == null)
+            {
+                return new Tuple<User, string, bool>(user, "Username ou senha incorretos!", false);
+            }
+            return new Tuple<User,string,bool>(user, "Login efetuado.", true);
+        }
+
+
     }
 
     public class UserMetadata
