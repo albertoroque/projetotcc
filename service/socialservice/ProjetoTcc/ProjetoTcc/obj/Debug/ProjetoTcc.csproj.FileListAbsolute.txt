@@ -68,3 +68,4 @@ C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\EntityFra
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Cors.dll
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Http.Cors.dll
 C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\bin\System.Web.Http.Cors.xml
+C:\Projetos\projetotcc\service\socialservice\ProjetoTcc\ProjetoTcc\obj\Debug\ProjetoTcc.csprojResolveAssemblyReference.cache

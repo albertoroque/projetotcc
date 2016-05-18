@@ -7,6 +7,7 @@ angular.module('Proj',[
     'proj.erro',
     'proj.local',
     'proj.timeline',
+    'proj.cadastro',
     'proj.perfil'
   	])
 

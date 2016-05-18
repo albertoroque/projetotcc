@@ -29,6 +29,12 @@
 	color: #eee;
 }
 
+.social-login-link{
+	text-decoration: none;
+	cursor: pointer;
+	color: white;
+}
+
 
 .text-center{
 	text-align: center;
