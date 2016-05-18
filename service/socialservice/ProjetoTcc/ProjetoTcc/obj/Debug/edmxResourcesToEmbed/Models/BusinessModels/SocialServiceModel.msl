@@ -7,6 +7,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idUser" ColumnName="idUser" />
           <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -14,9 +15,11 @@
       <EntityTypeMapping TypeName="SocialServiceModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="fbid" ColumnName="fbid" />
+          <ScalarProperty Name="placeId" ColumnName="placeId" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="fbid" ColumnName="fbid" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
           <ScalarProperty Name="avatar" ColumnName="avatar" />
         </MappingFragment>
       </EntityTypeMapping>

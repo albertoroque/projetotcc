@@ -12,15 +12,18 @@
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUser" Type="bigint" Nullable="false" />
           <Property Name="url" Type="text" />
+          <Property Name="titulo" Type="varchar" MaxLength="70" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fbid" Type="text" />
+          <Property Name="placeId" Type="text" />
           <Property Name="username" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="45" />
-          <Property Name="fbid" Type="varchar" MaxLength="45" />
+          <Property Name="nome" Type="varchar" MaxLength="45" />
           <Property Name="avatar" Type="text" />
         </EntityType>
         <Association Name="fk_Post_User">
@@ -55,6 +58,7 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idUser" Type="Int64" Nullable="false" />
           <Property Name="url" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="titulo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.fk_Post_User" FromRole="Post" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
@@ -62,9 +66,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fbid" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="placeId" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="username" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="fbid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="avatar" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Post" Relationship="Self.fk_Post_User" FromRole="User" ToRole="Post" />
         </EntityType>
@@ -100,6 +106,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -107,9 +114,11 @@
             <EntityTypeMapping TypeName="SocialServiceModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fbid" ColumnName="fbid" />
+                <ScalarProperty Name="placeId" ColumnName="placeId" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="fbid" ColumnName="fbid" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
               </MappingFragment>
             </EntityTypeMapping>

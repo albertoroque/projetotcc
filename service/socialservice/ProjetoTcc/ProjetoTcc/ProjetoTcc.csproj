@@ -176,13 +176,10 @@
     <Compile Include="Helpers\DataTransferObjects\PostDto.cs" />
     <Compile Include="Helpers\DataTransferObjects\UserDto.cs" />
     <Compile Include="Helpers\Extensions\StringExtension.cs" />
-    <Compile Include="Models\BusinessModels\Social.cs" />
-    <Compile Include="Models\Repositories\BaseRepository.cs" />
     <Compile Include="Models\BusinessModels\Post.cs">
       <DependentUpon>SocialServiceModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositories\PostRepository.cs" />
-    <Compile Include="Models\Repositories\UserRepository.cs" />
+    <Compile Include="Models\BusinessModels\Social.cs" />
     <Compile Include="Models\BusinessModels\SocialServiceModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -201,6 +198,9 @@
     <Compile Include="Models\BusinessModels\User.cs">
       <DependentUpon>SocialServiceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositories\BaseRepository.cs" />
+    <Compile Include="Models\Repositories\PostRepository.cs" />
+    <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\BusinessModels\_Post.cs" />
     <Compile Include="Models\BusinessModels\_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,23 +214,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BusinessModels\SocialServiceModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SocialServiceModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BusinessModels\SocialServiceModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
-      <LastGenOutput>SocialServiceModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\BusinessModels\SocialServiceModel.edmx.diagram">
-      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\BusinessModels\SocialServiceModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
-      <LastGenOutput>SocialServiceModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -250,6 +233,23 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <EntityDeploy Include="Models\BusinessModels\SocialServiceModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SocialServiceModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BusinessModels\SocialServiceModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
+      <LastGenOutput>SocialServiceModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BusinessModels\SocialServiceModel.edmx.diagram">
+      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\BusinessModels\SocialServiceModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SocialServiceModel.edmx</DependentUpon>
+      <LastGenOutput>SocialServiceModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

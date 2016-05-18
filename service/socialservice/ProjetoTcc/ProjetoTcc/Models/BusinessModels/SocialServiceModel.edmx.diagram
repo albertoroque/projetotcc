@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4547006cc4b2457299c92c9791039ab9" Name="Diagram1">
-        <EntityTypeShape EntityType="SocialServiceModel.Post" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialServiceModel.User" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+      <Diagram DiagramId="bb428bdc7853493190fa59fda72a0d59" Name="Diagram1">
+        <EntityTypeShape EntityType="SocialServiceModel.Post" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialServiceModel.User" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="SocialServiceModel.fk_Post_User" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

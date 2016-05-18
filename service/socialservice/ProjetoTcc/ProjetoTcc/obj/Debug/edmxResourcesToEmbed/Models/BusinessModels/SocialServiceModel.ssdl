@@ -7,15 +7,18 @@
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUser" Type="bigint" Nullable="false" />
     <Property Name="url" Type="text" />
+    <Property Name="titulo" Type="varchar" MaxLength="70" />
   </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fbid" Type="text" />
+    <Property Name="placeId" Type="text" />
     <Property Name="username" Type="varchar" MaxLength="70" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="45" />
-    <Property Name="fbid" Type="varchar" MaxLength="45" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
     <Property Name="avatar" Type="text" />
   </EntityType>
   <Association Name="fk_Post_User">
