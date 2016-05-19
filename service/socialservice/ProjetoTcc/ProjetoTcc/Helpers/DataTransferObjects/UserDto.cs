@@ -9,6 +9,9 @@ namespace ProjetoTcc.Helpers.DataTransferObjects
     {
         public long id { get; set; }
         public string username { get; set; }
+
+        public string nome { get; set; }
+
         public string fbid { get; set; }
         public string avatar { get; set; }
         public IEnumerable<PostDto> posts { get; set; }
@@ -17,6 +20,7 @@ namespace ProjetoTcc.Helpers.DataTransferObjects
         {
             this.id = user.id;
             this.username = user.username;
+            this.nome = user.nome;
             this.fbid = user.fbid;
             this.avatar = user.avatar;
             this.posts = user.Post.Select(model => new PostDto(model));

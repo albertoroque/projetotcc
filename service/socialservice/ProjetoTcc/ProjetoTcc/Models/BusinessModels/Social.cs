@@ -19,23 +19,41 @@ namespace ProjetoTcc.Models.BusinessModels
         {
             try
             {
-                var newUser = new User()
+                user.username = user.username.ToLower();
+                
+                if (VerificaUsername(user.username))
                 {
-                    username = user.username,
-                    password = user.password.ToMD5(),
-                    avatar = user.avatar,
-                    fbid = user.fbid
-                };
+                    return null;
+                }
+                else
+                {
+                    var newUser = new User()
+                    {
+                        username = user.username,
+                        password = user.password.ToMD5(),
+                        avatar = user.avatar,
+                        fbid = user.fbid
+                    };
 
-                var userRepository = new UserRepository(bd);
-                userRepository.Criar(newUser);
-                userRepository.Persistir();
-                return newUser;
+                    var userRepository = new UserRepository(bd);
+                    userRepository.Criar(newUser);
+                    userRepository.Persistir();
+                    return newUser;
+                }                
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        public bool VerificaUsername(string username)
+        {
+            var user = new User();
+
+            var count = user.Obter().Where(x => x.username.Equals(username)).Count();
+      
+            return count > 0 ? true : false; 
         }
 
         public User EditarUsuario(User user)

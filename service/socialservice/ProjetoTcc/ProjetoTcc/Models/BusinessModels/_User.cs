@@ -26,6 +26,17 @@ namespace ProjetoTcc.Models.BusinessModels
             return user;
         }
 
+        public User Obter(string username)
+        {
+            var userRepository = new UserRepository(bd);
+            var user = userRepository.Obter(x => x.username.Equals(username)).FirstOrDefault();
+            if (user == null)
+            {
+                throw new ObjectNotFoundException("Usuário inexistente!");
+            }
+            return user;
+        }
+
         public IEnumerable<User> Obter()
         {
             var userRepository = new UserRepository(bd);

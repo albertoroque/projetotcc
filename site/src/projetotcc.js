@@ -29,15 +29,31 @@ angular.module('Proj',[
     }
   ])
 
+
+.controller('SocialCtrl', function ($scope, $rootScope, $mdToast, Auth) {
+    
+    $rootScope.toast = function(conteudo) {
+      var position = {
+        bottom: true,
+        top: false,
+        left: true,
+        right: false
+      };
+        $mdToast.show(
+          $mdToast.simple()
+            .content(conteudo)              
+            .position(position)
+            .hideDelay(3000)
+        );
+      };
+
+})
+
+
   
 .controller('MenuCtrl', function ($scope, $rootScope, $timeout, $mdSidenav, $log) {
        
   })
 
-
-.controller('SocialCtrl', function ($scope, $rootScope, Auth) {
-          
-
-})
 
  

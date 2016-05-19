@@ -28,8 +28,12 @@ namespace ProjetoTcc.Controllers
 
                     var social = new Social();
                     var result = social.CriarUsuario(user);
-                    return Request.CreateResponse(HttpStatusCode.Created, new UserDto(user.Obter(result.id)));
 
+                    if (result != null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, new UserDto(user.Obter(result.id)));
+                    }
+                    return Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, "Usuário existente");
                 }
                 return Request.CreateErrorResponse(HttpStatusCode.PreconditionFailed, "Campos incorretos.");
             }
@@ -85,6 +89,27 @@ namespace ProjetoTcc.Controllers
             {
                 var user = new User();
                 var result = user.Obter(id);
+                return Request.CreateResponse(HttpStatusCode.OK, new UserDto(result));
+            }
+            catch (Exception ex)
+            {
+                if (ex is ObjectNotFoundException)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("{username}")]
+        public HttpResponseMessage Obter(string username)
+        {
+            try
+            {
+                var user = new User();
+                var result = user.Obter(username);
                 return Request.CreateResponse(HttpStatusCode.OK, new UserDto(result));
             }
             catch (Exception ex)

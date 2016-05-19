@@ -17,15 +17,19 @@
     <md-progress-linear md-mode="indeterminate" ng-show="$parent.carregando"></md-progress-linear>
 
     <div layout="column" layout-align="center center" class="container">       
-      <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>      
-      <h4 class="md-title text-center"> 
-        Adicione a sua localização ao seu perfil!
-      </h4>
-      <md-button class="md-primary md-raised " ng-click="buscaLocal()"> 
+      <!-- <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dadosPerfil.avatar}}');"></div>       -->
+
+      <h4 class=" text-center"> 
         <i class="fa fa-map-marker fa-lg"></i>
+      </h4>
+      <h4 class="md-title text-center"> 
+        Adicione a sua localização ao seu perfil
+      </h4>
+      
+      <md-button class="md-primary md-raised " ng-click="buscaLocal()">         
          adicionar localização
       </md-button>
-      <md-button class="md-primary" ng-click="goto(dadosPerfil.rota);">
+      <md-button class="md-primary" ng-click="gotoPerfil();">
          ir para perfil
       </md-button>      
       

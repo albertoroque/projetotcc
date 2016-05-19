@@ -35,6 +35,10 @@ angular.module('proj.perfil')
 	    });
       
 	    return d.promise;
+	},
+
+	carregarPerfil : function(user){
+
 	}
 }
     

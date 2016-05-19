@@ -11,20 +11,43 @@ angular.module('proj.local', [])
 })
 
 
-.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth) {        
+.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth, LoginService) {        
   
 	
-	$scope.dadosPerfil = {};
+	$scope.dadosConta = {};
+    $scope.dadosPerfil = {};
     $scope.carregando = false;
 
 	var geocoder = new google.maps.Geocoder;
 
 	$scope.carregaPagina= function(){
-		$scope.dadosPerfil = Auth.get();
-		if(!$scope.dadosPerfil.isLogado){
-			alert('Você não está logado!');
-			$location.path('/login');
-		}		
+
+		$scope.dadosConta = Auth.get();
+
+        console.log($scope.dadosConta);
+    
+		if($scope.dadosConta.isLogado){            
+
+            var user = {};
+            user.username = $scope.dadosConta.username;
+            user.password = $scope.dadosConta.password;
+
+            LoginService.logar(user)
+              .then(function(result){                
+                $scope.dadosPerfil = result; 
+
+                console.log($scope.dadosPerfil);
+
+              })  
+              .catch(function(result){
+                $scope.carregaPagina();
+              }) 
+
+		}else{
+
+            alert('Você não está logado!');
+            $location.path('/login');
+        }	
 	}
 
 	$scope.buscaLocal =  function(){
@@ -33,7 +56,8 @@ angular.module('proj.local', [])
         $scope.carregando = true;
 	}
 
-    $scope.goto = function(page){
+    $scope.gotoPerfil = function(){
+        var page = 'perfil/' + $scope.dadosConta.username;
         $location.path(page);
     }
 
