@@ -21,6 +21,8 @@ angular.module('proj.perfil', [])
 	$scope.dadosPerfil = {};
 
 	$scope.images = {};	
+
+	$scope.isRoot = false;
 	
 
 	// CARREGA PERFIL DO USUÁRIO PELA ROTA
@@ -38,9 +40,11 @@ angular.module('proj.perfil', [])
 
 				console.log($scope.dadosPerfil);
 
+				console.log('CONTA', $scope.dadosConta);
+
 				$scope.images = result.posts;
 
-				console.log($scope.images);
+				
 
 				convertePlaceId($scope.dadosPerfil.placeid);
 			})
