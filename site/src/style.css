@@ -14,8 +14,6 @@
 }
 
 
-
-
 .login-form{
 	width: 100%; 
 	max-width: 500px; 
@@ -27,6 +25,10 @@
 
 .social-color-white{
 	color: #eee;
+}
+
+.text-gray{
+	color: #777;
 }
 
 .social-login-link{

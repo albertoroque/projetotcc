@@ -2,8 +2,10 @@
 
 angular.module('proj.perfil')
 
-.service('PerfilService', function ($http, $q) {
-    
+.service('PerfilService', function ($http, $q) {    
+	var serverstatic = "http://localhost:63349/api/v1";
+	var serversocial = "http://localhost:51698/projetotcc/api/";
+
     return {
     	upload: function(data) {
 
@@ -37,8 +39,36 @@ angular.module('proj.perfil')
 	    return d.promise;
 	},
 
-	carregarPerfil : function(user){
+	carregarPerfil : function(username){
 
+		var d = $q.defer(),
+		url = serversocial + 'users/' + username; 
+
+		$http.get(url)
+		.success(function(result){
+			d.resolve(result);
+		})
+		.error(function(result){
+			d.reject(result);
+		});
+
+		return d.promise;
+	},
+
+	criarPost : function(iduser, post){
+
+		var d = $q.defer(),
+		url = serversocial + 'users/' + iduser + '/posts'; 
+
+		$http.post(url, post)
+		.success(function(result){
+			d.resolve(result);
+		})
+		.error(function(result){
+			d.reject(result);
+		});
+
+		return d.promise;
 	}
 }
     

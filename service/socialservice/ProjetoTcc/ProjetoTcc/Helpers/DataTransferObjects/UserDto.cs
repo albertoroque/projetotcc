@@ -13,6 +13,9 @@ namespace ProjetoTcc.Helpers.DataTransferObjects
         public string nome { get; set; }
 
         public string fbid { get; set; }
+
+        public string placeid { get; set; }
+
         public string avatar { get; set; }
         public IEnumerable<PostDto> posts { get; set; }
 
@@ -22,6 +25,7 @@ namespace ProjetoTcc.Helpers.DataTransferObjects
             this.username = user.username;
             this.nome = user.nome;
             this.fbid = user.fbid;
+            this.placeid = user.placeId;
             this.avatar = user.avatar;
             this.posts = user.Post.Select(model => new PostDto(model));
         }

@@ -122,6 +122,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="img\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Imagem\" />
   </ItemGroup>

@@ -2,7 +2,7 @@ angular.module('proj.cadastro')
 
 .service('CadastroService', function ($http, $q){
 
-	var serverstatic = "http://localhost:51698/api/v1";
+	var serverstatic = "http://localhost:63349/api/v1";
 	var serversocial = "http://localhost:51698/projetotcc/api/";
 
 	return {

@@ -47,21 +47,21 @@
         </h4>
 
         <!-- adicionar local caso não exista -->
-        <md-button class="md-primary" ng-if="dadosPerfil.placeId == 0" ng-href="#/local" style="margin: 0px;">
+        <md-button class="md-primary" ng-if="!dadosPerfil.placeid" ng-href="#/local" style="margin: 0px;">
           adicionar local
         </md-button>
 
         <!-- actions -->        
-        <p id="local" ng-if="dadosPerfil.placeId != 0">          
-          <i class="fa fa-map-marker fa-lg"></i>          
-        </p>                   
-        <p> {{ dadosPerfil.totalPublicacoes }} publicações</p>                  
+        <p id="local" class="text-gray" ng-if="dadosPerfil.placeid"></p>                   
+
+        <p class="text-gray"> {{ dadosPerfil.posts.length }} publicações</p>                  
 
         <md-button class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()">
           <i class="fa fa-plus fa-lg"></i>
           <i class="fa fa-camera fa-lg"></i>
         </md-button>   
-        <input style="display: none" type="file" id="btn-upload" onchange="angular.element(this).scope().uploadDeImagem(this);" />                
+        <input style="display: none" type="file" id="btn-upload" 
+        onchange="angular.element(this).scope().uploadDeImagem(this);" />                
       </div>
     </div>  
 
@@ -70,7 +70,7 @@
       <md-grid-list md-cols="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="4px" md-gutter-gt-sm="4px">
 
         <!-- repeat de imagens -->
-        <md-grid-tile ng-repeat="t in images track by $index" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" style="background-image: url('{{ t.bk }}'); background-size: cover;">            
+        <md-grid-tile ng-repeat="t in images" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" style="background-image: url('{{ t.url }}'); background-size: cover;">            
         </md-grid-tile>
 
       </md-grid-list>

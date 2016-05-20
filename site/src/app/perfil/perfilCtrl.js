@@ -16,37 +16,37 @@ angular.module('proj.perfil', [])
 //https://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
 //http://jsfiddle.net/JeJenny/ZG9re/
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $location, $timeout, $q, Auth, PerfilService) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, $q, Auth, PerfilService) {        
 
 	$scope.dadosPerfil = {};
 
-	$scope.images = [];
-	var it = {};
+	$scope.images = {};	
 	
 
 	// CARREGA PERFIL DO USUÁRIO PELA ROTA
 	$scope.carregaPerfil= function(){
 		
-		$scope.dadosPerfil = Auth.get();
+		$scope.dadosConta = Auth.get();
+		
 
-		console.log($scope.dadosPerfil);
+		var userRota = $routeParams.rota;
 
-		if($scope.dadosPerfil.placeId == 0){
+		PerfilService.carregarPerfil(userRota)
+			.then(function(result){
 
-		}else{
-			$scope.dadosPerfil.local = convertePlaceIdw($scope.dadosPerfil.placeId);
-		}			
+				$scope.dadosPerfil = result;
 
-		if(!$scope.dadosPerfil.isLogado){			
-			$location.path('/login');
-		}
+				console.log($scope.dadosPerfil);
 
-		for (var j=0; j<5; j++) {
-		  it.bk = "http://localhost:63349/img/33d677a6bd9d4b9b9301557a1b8a0749.jpg";
-		  $scope.images.push(it);		
-		}
+				$scope.images = result.posts;
 
-		console.log($scope.images);			
+				console.log($scope.images);
+
+				convertePlaceId($scope.dadosPerfil.placeid);
+			})
+			.catch(function(result){
+
+			})			
 	}
 
 
@@ -56,19 +56,23 @@ angular.module('proj.perfil', [])
 	*
 	*
 	**/
-	function convertePlaceIdw(placeId){
+	function convertePlaceId(placeId){
 		var geocoder = new google.maps.Geocoder();
 			    
 	    geocoder.geocode({'placeId': placeId}, function(results, status)
 	    {
 	      if (status == google.maps.GeocoderStatus.OK)
-	      {	        
+	      {	 
+
+	      	// console.log('voltou resultado');       
 			if (results[0])
 			{   
-				var icon = '<i class="fa fa-map-marker fa-lg"></i>';
+				var icon = '<i class="fa fa-map-marker fa-lg"></i>&nbsp;';
 				var bairro = results[0].address_components[1].long_name;
 				var cidade = results[0].address_components[2].long_name;
-				console.log(results[0]);
+
+				// console.log(results[0]);
+
 				document.getElementById("local").innerHTML = icon +' '+ bairro + ', ' + cidade;
 				return results[0].formatted_address;				
 			}else{
@@ -102,15 +106,27 @@ angular.module('proj.perfil', [])
             .then(function(multimidia) {
 
             	console.log(multimidia);
-            	var im = {};
-            	im.bk = multimidia;
-            	$scope.images.push(im);
-            	console.log($scope.images);                
-
+            	$scope.gravaImagem(multimidia);
             })
             .catch(function(retorno) {
                 alert('ERRO');
             });          
     };
+
+    $scope.gravaImagem = function(path){
+
+    	var post = {};
+
+    	post.url = path;
+
+    	PerfilService.criarPost($scope.dadosPerfil.id, post)
+    	.then(function(result){
+    		console.log('ok',result);
+    	})
+    	.catch(function(result){
+    		console.log('erro',result);
+    	})
+
+    }
 
 })
