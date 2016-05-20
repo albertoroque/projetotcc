@@ -55,6 +55,25 @@ angular.module('proj.perfil')
 		return d.promise;
 	},
 
+	editarPerfil : function(userdata){
+
+		var d = $q.defer(),
+		url = serversocial + 'users/' + userdata.id;
+
+		console.log(userdata);
+
+		$http.put(url, userdata)
+		.success(function(result){
+
+			d.resolve(result);
+		})
+		.error(function(result){
+			d.reject(result);
+		});
+
+		return d.promise;
+	},
+
 	criarPost : function(iduser, post){
 
 		var d = $q.defer(),

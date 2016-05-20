@@ -16,7 +16,7 @@ angular.module('proj.perfil', [])
 //https://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
 //http://jsfiddle.net/JeJenny/ZG9re/
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, $q, Auth, PerfilService) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, $q, Auth, PerfilService, LoginService) {        
 
 	$scope.dadosPerfil = {};
 
@@ -38,21 +38,49 @@ angular.module('proj.perfil', [])
 
 				$scope.dadosPerfil = result;
 
-				console.log($scope.dadosPerfil);
+				// console.log($scope.dadosPerfil);
+				// console.log('CONTA', $scope.dadosConta);
 
-				console.log('CONTA', $scope.dadosConta);
-
-				$scope.images = result.posts;
-
-				
+				$scope.images = result.posts;				
 
 				convertePlaceId($scope.dadosPerfil.placeid);
+
+				verificaRoot();
 			})
 			.catch(function(result){
 
 			})			
 	}
 
+	function carregaFotos(user){
+		PerfilService.carregarPerfil(userRota)
+			.then(function(result){			
+				$scope.images = result.posts;							
+			})
+			.catch(function(result){
+				$rootScope.toast('Erro ao atualizar sua galeria');
+			})	
+	}
+
+	function verificaRoot(){
+		
+		var user = {};
+        user.username = $scope.dadosConta.username;
+        user.password = $scope.dadosConta.password;
+
+        LoginService.logar(user)
+          .then(function(result){                
+
+          	console.log(result);
+          	var contaLogada = {};
+          	contaLogada = result; 
+
+          	if($scope.dadosPerfil.id ==  contaLogada.id)
+				$scope.isRoot = true;                      
+          })            
+
+				
+	}
 
 
 	/*

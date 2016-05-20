@@ -13,28 +13,19 @@
       
         <md-input-container  class="md-block md-icon-float">
           <label class="social-color-white">Nome da conta</label>            
-          <input ng-model="user.username" required minlength="3" maxlength="100" name="username">
-          <div ng-messages="userform.username.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
+          <input ng-model="user.username" required minlength="3" maxlength="100" name="username">          
         </md-input-container>
 
 
         <md-input-container class="md-block md-icon-float">
           <label class="social-color-white" style="text-shadow: none;">Senha</label>            
-          <input ng-model="user.password" type="password" required minlength="6" maxlength="100" name="password">
-          <div ng-messages="userform.password.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
+          <input ng-model="user.password" type="password" required minlength="6" maxlength="100" name="password">          
         </md-input-container>
 
 
         <md-input-container class="md-block md-icon-float">
           <label class="social-color-white">Nome</label>            
-          <input ng-model="user.nome" required minlength="5" maxlength="100" name="nome">
-          <div ng-messages="userform.nome.$error">
-            <div ng-message="required">This is required.</div>
-          </div>
+          <input ng-model="user.nome" required minlength="5" maxlength="100" name="nome">          
         </md-input-container>      
 
         <p class="text-center" style="color: red;">{{ erro }}</p>

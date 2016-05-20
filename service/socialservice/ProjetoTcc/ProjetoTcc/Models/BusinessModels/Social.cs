@@ -32,6 +32,7 @@ namespace ProjetoTcc.Models.BusinessModels
                         username = user.username,
                         password = user.password.ToMD5(),
                         avatar = user.avatar,
+                        nome = user.nome,
                         fbid = user.fbid
                     };
 
@@ -64,6 +65,7 @@ namespace ProjetoTcc.Models.BusinessModels
                 newUser.username = user.username;
                 newUser.avatar = user.avatar;
                 newUser.fbid = user.fbid;
+                newUser.placeId = user.placeId;
 
                 var userRepository = new UserRepository(bd);
                 userRepository.Editar(newUser, newUser.id);

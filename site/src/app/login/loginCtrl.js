@@ -88,7 +88,13 @@ angular.module('proj.login', [])
 
         Auth.set(dadosConta);
 
-        $location.path('/local');   
+        if(result.placeid){
+          $location.path('/perfil/' + result.username);   
+        }else{
+          $location.path('/local');   
+        }
+
+        
       })  
 
       .catch(function(result){

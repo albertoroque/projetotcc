@@ -11,7 +11,7 @@ angular.module('proj.local', [])
 })
 
 
-.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth, LoginService) {        
+.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth, LoginService, PerfilService) {        
   
 	
 	$scope.dadosConta = {};
@@ -24,7 +24,7 @@ angular.module('proj.local', [])
 
 		$scope.dadosConta = Auth.get();
 
-        console.log($scope.dadosConta);
+        //console.log($scope.dadosConta);
     
 		if($scope.dadosConta.isLogado){            
 
@@ -34,9 +34,7 @@ angular.module('proj.local', [])
 
             LoginService.logar(user)
               .then(function(result){                
-                $scope.dadosPerfil = result; 
-
-                console.log($scope.dadosPerfil);
+                $scope.dadosPerfil = result;             
 
               })  
               .catch(function(result){
@@ -44,7 +42,6 @@ angular.module('proj.local', [])
               }) 
 
 		}else{
-
             alert('Você não está logado!');
             $location.path('/login');
         }	
@@ -61,39 +58,40 @@ angular.module('proj.local', [])
         $location.path(page);
     }
 
-	function cookieLocal(local){		
-		//$location.path($scope.dadosPerfil.rota);
+	function atualizaPerfil(local){		
+		
         if(local.place_id != null){
-            $scope.dadosPerfil.placeId = local.place_id;
-            Auth.set($scope.dadosPerfil);        
-            $location.path('perfil/alberto');
-            console.log(Auth.get().rota);        
 
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.body))
-                .clickOutsideToClose(true)
-                .title('LOCALIZAÇÃO PRONTA')
-                .textContent('Seu perfil contém as informações do seu local para que outros amigos te achem com mais facilidade')
-                .ariaLabel('Ok Localização')
-                .ok('ok')    
-            );
-
+            $scope.dadosPerfil.placeId = local.place_id;        
+            
+            PerfilService.editarPerfil($scope.dadosPerfil)
+            .then(function(result){        
+                $location.path('perfil/' + $scope.dadosPerfil.username);
+                mostraDialog('Localização ativada','Seu perfil contém as informações do seu local para que outros amigos te achem com mais facilidade');
+            })
+            .catch(function(result){
+                $location.path('perfil/' + $scope.dadosPerfil.username);
+                mostraDialog('Ops','Aconteceu algo de errado ao atualizar sua localização');
+            })
 
         }else{
-            $mdDialog.show(
-              $mdDialog.alert()
-                .parent(angular.element(document.body))
-                .clickOutsideToClose(true)
-                .title('Ops')
-                .textContent('Você pode ter esquecido de usar sua localização. Tente novamente!')
-                .ariaLabel('Erro Localização')
-                .ok('ok')
-                .targetEvent(ev)
-            );
+
+           mostraDialog('Localização com problemas','Tente fechar o navegador ou até limpar o histórico');
             
         }		
 	}
+
+
+    function mostraDialog(titulo, descricao){
+         $mdDialog.show(
+              $mdDialog.alert()
+                .parent(angular.element(document.body))
+                .clickOutsideToClose(true)
+                .title(titulo)
+                .textContent(descricao)                
+                .ok('ok')                
+            );
+    }
 
    
     function getLocation() {
@@ -111,7 +109,7 @@ angular.module('proj.local', [])
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                     console.log('achei!');
-                	cookieLocal(results[0]);
+                	atualizaPerfil(results[0]);
                 }
             } else {
               alert("Geocode was not successful for the following reason: " + status);

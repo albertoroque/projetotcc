@@ -56,7 +56,7 @@
 
         <p class="text-gray"> {{ dadosPerfil.posts.length }} publicações</p>                  
 
-        <md-button class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()">
+        <md-button ng-if="isRoot" class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()">
           <i class="fa fa-plus fa-lg"></i>
           <i class="fa fa-camera fa-lg"></i>
         </md-button>   
@@ -65,14 +65,21 @@
       </div>
     </div>  
 
-    <div flex class="container" style="background-color:; min-height: 300px;">
+    <div flex class="container" style="  min-height: 300px;">      
       
-      <md-grid-list md-cols="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="4px" md-gutter-gt-sm="4px">
+      <div ng-if="!images.length" layout="column" layout-align="center center">
+        <h4 class=" text-center" style="font-size: 60px; margin: 20px;"> 
+          <i class="fa fa-picture-o fa-lg"></i>
+        </h4>
+        <h4 class="md-body-2 text-center"> 
+          Você não possui postagens
+        </h4>
+      </div>
 
+      <md-grid-list ng-if="images.length" md-cols="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="4px" md-gutter-gt-sm="4px">
         <!-- repeat de imagens -->
         <md-grid-tile ng-repeat="t in images" md-rowspan="1" md-colspan="1" md-colspan-sm="1" md-colspan-xs="1" style="background-image: url('{{ t.url }}'); background-size: cover;">            
         </md-grid-tile>
-
       </md-grid-list>
 
     </div>
