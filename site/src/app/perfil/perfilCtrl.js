@@ -52,8 +52,8 @@ angular.module('proj.perfil', [])
 			})			
 	}
 
-	function carregaFotos(user){
-		PerfilService.carregarPerfil(userRota)
+	function carregaImagens(user){
+		PerfilService.carregarPerfil(user)
 			.then(function(result){			
 				$scope.images = result.posts;							
 			})
@@ -154,6 +154,8 @@ angular.module('proj.perfil', [])
     	PerfilService.criarPost($scope.dadosPerfil.id, post)
     	.then(function(result){
     		console.log('ok',result);
+    		carregaImagens($scope.dadosPerfil.username);
+
     	})
     	.catch(function(result){
     		console.log('erro',result);
