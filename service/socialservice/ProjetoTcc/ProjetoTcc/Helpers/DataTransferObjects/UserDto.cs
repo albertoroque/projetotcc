@@ -27,7 +27,7 @@ namespace ProjetoTcc.Helpers.DataTransferObjects
             this.fbid = user.fbid;
             this.placeid = user.placeId;
             this.avatar = user.avatar;
-            this.posts = user.Post.Select(model => new PostDto(model));
+            this.posts = user.Post.Select(model => new PostDto(model)).OrderByDescending(o => o.id);
         }
     }
 }
