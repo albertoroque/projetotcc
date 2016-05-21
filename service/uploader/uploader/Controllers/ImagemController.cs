@@ -21,7 +21,7 @@ namespace uploader.Controllers
         //http://www.c-sharpcorner.com/UploadFile/2b481f/uploading-a-file-in-Asp-Net-web-api/
 
         [HttpPost, Route("")]
-        public object Post()
+        public IHttpActionResult Post()
         {
 
             try
@@ -40,7 +40,12 @@ namespace uploader.Controllers
                                                
                         if (!extension.Equals(".jpg") && !extension.Equals(".png"))
                         {
-                            result = "Extensão não suportada";
+                            result = "Extensão não suportada"; 
+                          
+                        }else 
+                        if(postedFile.ContentLength > 3200000)
+                        {
+                            result = "Tamanho de arquivo não supotado";
                         }
                         else
                         {
@@ -53,18 +58,22 @@ namespace uploader.Controllers
                             postedFile.SaveAs(filePath);
 
                             result = "http://" + HttpContext.Current.Request.Url.Authority + "/img/" + filename;
-                        }                                                
-                    }                    
+                            return this.Ok(result); 
+                        }
+
+                        return this.BadRequest((string)result);
+                    }
+
+                    return this.InternalServerError();
                 }
                 else
                 {
-                    result = "404";
-                }
-                return result;
+                    return this.InternalServerError();
+                }                
             }
-            catch
+            catch (Exception ex)
             {
-                return "404";
+                return this.InternalServerError(ex);
             }
                       
         }        
