@@ -3,16 +3,21 @@
 
     <md-progress-linear md-mode="indeterminate" style="position: fixed;" ng-if="carregando"></md-progress-linear>
 
-    <div layout="column" class="login-form" style="margin-top: 2%;" md-theme="default"> 
+    <div layout="column" class="login-form slideup" style="margin-top: 2%;" md-theme="default"> 
 
       <h2 class="md-display-2  text-center">
         Entre no mundo mais Social
       </h2>
 
       <form name="userform">
+
+        <md-input-container class="md-block md-icon-float">
+          <label class="social-color-white">Nome completo</label>            
+          <input ng-model="user.nome" required minlength="5" maxlength="100" name="nome">          
+        </md-input-container>      
       
         <md-input-container  class="md-block md-icon-float">
-          <label class="social-color-white">Nome da conta</label>            
+          <label class="social-color-white">Nome do usuário</label>            
           <input ng-model="user.username" required minlength="3" maxlength="100" name="username">          
         </md-input-container>
 
@@ -21,12 +26,7 @@
           <label class="social-color-white" style="text-shadow: none;">Senha</label>            
           <input ng-model="user.password" type="password" required minlength="6" maxlength="100" name="password">          
         </md-input-container>
-
-
-        <md-input-container class="md-block md-icon-float">
-          <label class="social-color-white">Nome</label>            
-          <input ng-model="user.nome" required minlength="5" maxlength="100" name="nome">          
-        </md-input-container>      
+  
 
         <p class="text-center" style="color: red;">{{ erro }}</p>
 

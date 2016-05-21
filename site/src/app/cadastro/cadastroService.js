@@ -16,7 +16,7 @@ angular.module('proj.cadastro')
 				d.resolve(result);
 			})
 			.error(function(result){
-				d.reject("Erro ao cadastrar");
+				d.reject(result);
 			});
 
 			return d.promise;

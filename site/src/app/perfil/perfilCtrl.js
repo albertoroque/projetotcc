@@ -16,36 +16,32 @@ angular.module('proj.perfil', [])
 //https://uncorkedstudios.com/blog/multipartformdata-file-upload-with-angularjs
 //http://jsfiddle.net/JeJenny/ZG9re/
 
-.controller('PerfilCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, $q, Auth, PerfilService, LoginService) {        
+.controller('PerfilCtrl', function ($scope, $rootScope, $routeParams, $location, $timeout, $q, Auth, PerfilService, LoginService, AuthService) {        
 
 	$scope.dadosPerfil = {};
-
 	$scope.images = {};	
-
 	$scope.isRoot = false;
+	$scope.logado = false;
+
 	
 
 	// CARREGA PERFIL DO USUÁRIO PELA ROTA
 	$scope.carregaPerfil= function(){
-		
-		$scope.dadosConta = Auth.get();
-		
-
+					
 		var userRota = $routeParams.rota;
+
+
 
 		PerfilService.carregarPerfil(userRota)
 			.then(function(result){
 
 				$scope.dadosPerfil = result;
 
-				// console.log($scope.dadosPerfil);
-				// console.log('CONTA', $scope.dadosConta);
-
 				$scope.images = result.posts;				
 
 				convertePlaceId($scope.dadosPerfil.placeid);
 
-				verificaRoot();
+				verificaStatus();
 			})
 			.catch(function(result){
 
@@ -62,24 +58,18 @@ angular.module('proj.perfil', [])
 			})	
 	}
 
-	function verificaRoot(){
-		
-		var user = {};
-        user.username = $scope.dadosConta.username;
-        user.password = $scope.dadosConta.password;
+	/*
+	*
+	*
+	*
+	**/
+	function verificaStatus(){		   
+		AuthService.confirmAuth()
+		 .then(function(result){
 
-        LoginService.logar(user)
-          .then(function(result){                
-
-          	console.log(result);
-          	var contaLogada = {};
-          	contaLogada = result; 
-
-          	if($scope.dadosPerfil.id ==  contaLogada.id)
-				$scope.isRoot = true;                      
-          })            
-
-				
+		 	$scope.logado = result.isLogado;
+		 	if($scope.dadosPerfil.id == result.id) $scope.isRoot = true;
+		 })		 		
 	}
 
 
@@ -118,12 +108,6 @@ angular.module('proj.perfil', [])
 	      }
 	    });
 	}
-
-
-	$scope.logout = function(){
-		Auth.clear();
-		$location.path('/login');
-	};
 
 	/**
      * Função que realiza o upload das imagens

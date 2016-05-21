@@ -4,19 +4,36 @@
     <div style="width: 100%; max-width: 880px; margin: 0 auto;">
       <div class="md-toolbar-tools">      
         <h2>
-          <span> <i class="fa fa-braille fa-lg"></i> Social</span>
+          <span> Social</span>
         </h2>
-        <span flex></span>          
-        <md-menu>
+
+
+        <md-button class="social-menu-bt" ng-click="">
+          <i class="fa fa-search" style="margin-right: 7px;"></i>
+        </md-button>
+
+
+        <span flex></span>
+
+        <md-button class="" ng-href="#/login" ng-if="!logado">
+          ENTRAR
+        </md-button> 
+
+        <md-button class="social-menu-bt" ng-click="gotoMyProfile()" ng-if="logado">
+          <i class="fa fa-user" style="margin-right: 7px;"></i>
+        </md-button>
+      
+        <md-menu ng-if="isRoot">
           <md-button aria-label="Opções" class="md-icon-button" ng-click="$mdOpenMenu($event)">
             <i class="fa fa-ellipsis-v fa-lg"></i> 
           </md-button>
-          <md-menu-content width="4">
+          <md-menu-content width="4">            
+            
             <md-menu-item>
-              <md-button ng-click="">
-                <i class="fa fa-user  " style="margin-right: 7px;"></i>
-                Perfil
-              </md-button>
+              <md-button ng-click="#/editar">
+                <i class="fa fa-pencil " style="margin-right: 7px;"></i>
+                Editar
+              </md-button>                            
             </md-menu-item>
             <md-menu-item>
               <md-button ng-click="logout()">
@@ -24,8 +41,11 @@
                 Logout
               </md-button>                            
             </md-menu-item>
+            
           </md-menu-content>
         </md-menu>
+
+
       </div>
     </div>
   </md-toolbar>
