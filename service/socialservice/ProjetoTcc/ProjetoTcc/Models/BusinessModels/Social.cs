@@ -63,6 +63,7 @@ namespace ProjetoTcc.Models.BusinessModels
             {
                 var newUser = new User().Obter(user.id);
                 newUser.username = user.username;
+                newUser.nome = user.nome;
                 newUser.avatar = user.avatar;
                 newUser.fbid = user.fbid;
                 newUser.placeId = user.placeId;

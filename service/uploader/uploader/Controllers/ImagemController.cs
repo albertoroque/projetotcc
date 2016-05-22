@@ -38,7 +38,7 @@ namespace uploader.Controllers
                  
                         string extension = System.IO.Path.GetExtension(postedFile.FileName).Trim().ToLower();
                                                
-                        if (!extension.Equals(".jpg") && !extension.Equals(".png"))
+                        if (!extension.Equals(".jpg") && !extension.Equals(".png") && !extension.Equals(".jpeg"))
                         {
                             result = "Extensão não suportada"; 
                           

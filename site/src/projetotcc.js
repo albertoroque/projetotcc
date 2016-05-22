@@ -46,8 +46,7 @@ angular.module('Proj',[
       
       
       LoginService.logar(user)
-        .then(function(result){                            
-          $rootScope.toast('Logado como ' + result.nome);
+        .then(function(result){                                      
           result.isLogado = true;
           d.resolve(result);        
         }) 
@@ -62,6 +61,47 @@ angular.module('Proj',[
   }
 
 })
+
+.service('LocalService', ['$http','$q', 
+  function($http, $q){
+
+    return{
+
+      convertePlaceId : function(placeId){
+
+        var d = $q.defer();
+
+        var geocoder = new google.maps.Geocoder();
+            
+        geocoder.geocode({'placeId': placeId}, function(results, status)
+        {
+          if (status == google.maps.GeocoderStatus.OK)
+          {  
+                  
+            if (results[0])
+            {   
+              // var icon = '<i class="fa fa-map-marker fa-lg"></i>&nbsp;';
+              // var bairro = results[0].address_components[1].long_name;
+              // var cidade = results[0].address_components[2].long_name;      
+              
+              d.resolve(results[0].formatted_address);        
+              
+            }else{
+              d.resolve('Erro ao obter a localização');
+            }
+          } 
+          else
+          {           
+            d.resolve('Erro ao obter a localização');
+          }
+        })
+
+        return d.promise;
+      }
+
+
+    }//END RETURN LOCALSERVICE
+}])
 
 .controller('SocialCtrl', function ($scope, $rootScope, $mdToast, $location, Auth, LoginService, AuthService) {
     
@@ -116,10 +156,11 @@ angular.module('Proj',[
       
     })  
     .catch(function(result){
-      $rootScope.toast('Você não está logado')
+      $rootScope.toast('Você não está logado');
       return false;
     }) 
   }
+
 
 
 })
@@ -129,6 +170,9 @@ angular.module('Proj',[
 .controller('MenuCtrl', function ($scope, $rootScope, $timeout, $mdSidenav, $log) {
        
 })
+
+
+
 
 
  

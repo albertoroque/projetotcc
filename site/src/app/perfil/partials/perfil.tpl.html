@@ -7,11 +7,9 @@
           <span> Social</span>
         </h2>
 
-
         <md-button class="social-menu-bt" ng-click="">
           <i class="fa fa-search" style="margin-right: 7px;"></i>
         </md-button>
-
 
         <span flex></span>
 
@@ -30,7 +28,7 @@
           <md-menu-content width="4">            
             
             <md-menu-item>
-              <md-button ng-click="#/editar">
+              <md-button ng-click="editar()">
                 <i class="fa fa-pencil " style="margin-right: 7px;"></i>
                 Editar
               </md-button>                            
@@ -72,11 +70,11 @@
         </md-button>
 
         <!-- actions -->        
-        <p id="local" class="text-gray" ng-if="dadosPerfil.placeid"></p>                   
+        <p class="text-gray" ng-if="dadosPerfil.placeid">{{dadosPerfil.local}}</p>                   
 
         <p class="text-gray"> {{ dadosPerfil.posts.length }} publicações</p>                  
 
-        <md-button ng-if="isRoot" class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()">
+        <md-button ng-if="isRoot" class="md-raised md-primary" onclick="document.getElementById('btn-upload').click()" style="margin:0px;">
           <i class="fa fa-plus fa-lg"></i>
           <i class="fa fa-camera fa-lg"></i>
         </md-button>   

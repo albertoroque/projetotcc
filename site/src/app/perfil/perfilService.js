@@ -54,6 +54,7 @@ angular.module('proj.perfil')
 
 		return d.promise;
 	},
+	
 
 	editarPerfil : function(userdata){
 

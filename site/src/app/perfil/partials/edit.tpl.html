@@ -1,0 +1,66 @@
+<div flex>
+
+  <md-progress-linear md-mode="indeterminate" style="position: fixed;" ng-if="carregando"></md-progress-linear>
+
+  <md-toolbar class="md-hue-2 md-whiteframe-4dp">
+    <div style="width: 100%; max-width: 880px; margin: 0 auto;">
+      <div class="md-toolbar-tools">            
+        <h2>
+          <md-button class="social-menu-bt" ng-click="gotoMyProfile()">
+            <i class="fa fa-arrow-left" style="margin-right: 7px;"></i>
+          </md-button>
+          <span> Editando</span>
+        </h2>            
+      </div>
+    </div>
+  </md-toolbar>
+
+  <br><br>
+
+    <div layout="column" class="login-form slideup md-whiteframe-3dp" ng-init="carregaFormulario()" style="margin-top: 2%; height: auto; background-color: white;" md-theme="default"> 
+
+      <form name="editForm" ng-if="!carregando">
+      <!-- EDIT FOTO -->
+        <div flex="100" layout="column" layout-align="start start">          
+          <div flex>      
+            <div class="avatar md-whiteframe-3dp" style="background-image: url('{{dataedit.avatar}}'); height: 130px;width: 130px;"></div>      
+          </div>        
+          <div flex>              
+            <md-button class=" md-primary" onclick="document.getElementById('btn-edit').click()">
+              editar foto
+            </md-button> 
+             <input style="display: none" type="file" id="btn-edit" 
+              onchange="angular.element(this).scope().uploadDeImagem(this);"/>                           
+          </div>
+        </div>
+
+        <br><br>
+
+        <md-input-container class="md-block md-icon-float">
+          <label class="social-color-white">Nome completo</label>            
+          <input ng-model="dataedit.nome" required minlength="5" maxlength="100" name="nome">          
+        </md-input-container>      
+      
+        <div layout="row" layout-align="start start">
+          <p class="text-center">{{ dataedit.local }}</p>
+          <md-button class="md-primary" class="social-menu-bt" ng-click="gotoLocal()" style="margin: 0px;">
+            <i class="fa fa-refresh fa-lg"></i>
+          </md-button>  
+        </div>
+  
+        <p class="text-center" style="color: red;">{{ erro }}</p>
+
+      </form>    
+
+      <md-button class="md-raised md-primary" ng-click="editarPerfil();">
+        salvar
+      </md-button>  
+
+      <md-button class="" ng-click="">
+        <i class="fa fa-facebook-official fa-lg"></i>
+         &nbsp; atualizar com facebook
+      </md-button>
+
+    </div>
+  </div>
+  <!-- END LOGIN -->
