@@ -96,10 +96,17 @@
     console.log('-------------------------------');
     console.log('BUSCANDO INFORMAÇÕES');    
     
-    FB.api('/me', function(response) {
+    // FB.api('/me', function(response) {
+    //   console.log('-----------------------');
+    //   console.log('DADOS DA CONTA');
+    //   console.log(response);                
+    //   document.getElementById('status').innerHTML = 'Bem-vindo, ' + response.name + '!';
+    // });
+
+    FB.api('/me?fields=picture,name', function(response) {
       console.log('-----------------------');
-      console.log('DADOS DA CONTA');
-      console.log(response);                
+      console.log('DADOS DA CONTA');      
+      console.log(response);                     
       document.getElementById('status').innerHTML = 'Bem-vindo, ' + response.name + '!';
     });
   }
