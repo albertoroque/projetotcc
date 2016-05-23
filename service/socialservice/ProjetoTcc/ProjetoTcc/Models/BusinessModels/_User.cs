@@ -1,13 +1,11 @@
-﻿using ProjetoTcc.Models.Repositories;
-using SocialService.Models.Repositories;
+﻿using ProjetoTcc.Helpers.Extensions;
+using ProjetoTcc.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using System.Data;
-using ProjetoTcc.Helpers.Extensions;
+using System.Linq;
 
 namespace ProjetoTcc.Models.BusinessModels
 {
@@ -60,7 +58,7 @@ namespace ProjetoTcc.Models.BusinessModels
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
         }
@@ -74,7 +72,32 @@ namespace ProjetoTcc.Models.BusinessModels
             {
                 return new Tuple<User, string, bool>(user, "Username ou senha incorretos!", false);
             }
-            return new Tuple<User,string,bool>(user, "Login efetuado.", true);
+            else
+                if (user.fbid != null)
+                {
+                    return new Tuple<User, string, bool>(user, "Faça login no Facebook e volte", false);
+                }
+                else
+                {
+                    return new Tuple<User, string, bool>(user, "Login efetuado", true);
+                }
+
+
+        }
+
+        public Tuple<User, string, bool> AutenticarFacebook(string fbid)
+        {
+            var userRepository = new UserRepository(bd);
+            var user = userRepository.Obter(model => model.fbid.Equals(fbid)).FirstOrDefault();
+            if (user == null)
+            {
+                return new Tuple<User, string, bool>(user, "Erro ao logar com Facebook", false);
+            }
+            else
+            {
+                return new Tuple<User, string, bool>(user, "Login efetuado", true);
+            }
+
         }
 
 

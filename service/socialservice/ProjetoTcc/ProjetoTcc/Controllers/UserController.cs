@@ -1,12 +1,11 @@
 ﻿using ProjetoTcc.Helpers.DataTransferObjects;
 using ProjetoTcc.Models.BusinessModels;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Data;
 
 namespace ProjetoTcc.Controllers
 {
@@ -175,6 +174,26 @@ namespace ProjetoTcc.Controllers
             try
             {
                 var result = new User().AutenticarUsuario(auth.username, auth.password);
+
+                if (result.Item3)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, new UserDto(result.Item1));
+                }
+                return Request.CreateResponse(HttpStatusCode.NotFound, result.Item2);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("~/projetotcc/api/autenticarf")]
+        public HttpResponseMessage AutenticarFace(ProjetoTcc.Helpers.FaceAuth auth)
+        {
+            try
+            {
+                var result = new User().AutenticarFacebook(auth.fbid);
 
                 if (result.Item3)
                 {

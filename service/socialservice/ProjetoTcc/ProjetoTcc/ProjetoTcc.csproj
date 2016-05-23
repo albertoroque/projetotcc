@@ -176,6 +176,7 @@
     <Compile Include="Helpers\DataTransferObjects\PostDto.cs" />
     <Compile Include="Helpers\DataTransferObjects\UserDto.cs" />
     <Compile Include="Helpers\Extensions\StringExtension.cs" />
+    <Compile Include="Helpers\FaceAuth.cs" />
     <Compile Include="Models\BusinessModels\Post.cs">
       <DependentUpon>SocialServiceModel.tt</DependentUpon>
     </Compile>

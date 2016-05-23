@@ -1,9 +1,7 @@
-﻿using ProjetoTcc.Models.Repositories;
+﻿using ProjetoTcc.Helpers.Extensions;
+using ProjetoTcc.Models.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using ProjetoTcc.Helpers.Extensions;
 
 namespace ProjetoTcc.Models.BusinessModels
 {
@@ -20,27 +18,39 @@ namespace ProjetoTcc.Models.BusinessModels
             try
             {
                 user.username = user.username.ToLower();
-                
+
+
+
                 if (VerificaUsername(user.username))
                 {
                     return null;
                 }
                 else
                 {
-                    var newUser = new User()
-                    {
-                        username = user.username,
-                        password = user.password.ToMD5(),
-                        avatar = user.avatar,
-                        nome = user.nome,
-                        fbid = user.fbid
-                    };
+                    //var newUser = new User()
+                    //{
+                    //    username = user.username,
+                    //    password = user.password.ToMD5(),
+                    //    avatar = user.avatar,
+                    //    nome = user.nome,
+                    //    fbid = user.fbid
+                    //};
+
+                    var newUser = new User();
+                    newUser.username = user.username;
+                    if (user.password != null)
+                        newUser.password = user.password.ToMD5();
+
+                    newUser.avatar = user.avatar;
+                    newUser.nome = user.nome;
+                    newUser.fbid = user.fbid;
+
 
                     var userRepository = new UserRepository(bd);
                     userRepository.Criar(newUser);
                     userRepository.Persistir();
                     return newUser;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -53,8 +63,8 @@ namespace ProjetoTcc.Models.BusinessModels
             var user = new User();
 
             var count = user.Obter().Where(x => x.username.Equals(username)).Count();
-      
-            return count > 0 ? true : false; 
+
+            return count > 0 ? true : false;
         }
 
         public User EditarUsuario(User user)
@@ -100,10 +110,10 @@ namespace ProjetoTcc.Models.BusinessModels
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
-            
+
         }
     }
 }
