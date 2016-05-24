@@ -76,7 +76,8 @@ angular.module('proj.cadastro', [])
         $scope.carregando = false;
         
         dadosConta.username = user.username;  
-        dadosConta.password = user.password;                      
+        dadosConta.password = user.password;
+        dadosConta.fbid = user.fbid;                      
         dadosConta.isLogado = true;        
 
         Auth.set(dadosConta);
@@ -95,15 +96,13 @@ angular.module('proj.cadastro', [])
 
     dadoscad.avatar = face_data.picture.data.url;
     dadoscad.nome = face_data.name;
-    var a = face_data.name.toLowerCase().replace(/\s+/g, '');
-    dadoscad.username = a + face_data.id;
+
+    dadoscad.username = 'p' + face_data.id;
 
     //GERAR PASSWORD ALEATÓRIO SEGURAM NÃO USANDO ID
-    dadoscad.password = face_data.id;
+    //dadoscad.password = face_data.id;
 
-    dadoscad.fbid = face_data.id;
-
-    console.log(dadoscad);
+    dadoscad.fbid = face_data.id;  
 
     $scope.carregando = true;
 

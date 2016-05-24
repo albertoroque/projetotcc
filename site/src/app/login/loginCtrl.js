@@ -67,23 +67,31 @@ angular.module('proj.login', [])
   }
 ])
 
-.controller('LoginCtrl', function ($scope, $rootScope, $location, Auth, LoginService) {        
+.controller('LoginCtrl', function ($scope, $rootScope, $location, Auth,AuthService, LoginService) {        
   
   
   $scope.carregando = false;
+  $scope.wait_callsession = 1;
+  $scope.usersession = {};
 
   $scope.logar = function(user){
 
     var dadosConta = {};
     $scope.carregando = true;  
 
+    console.log(user);
+
     LoginService.logar(user)
       .then(function(result){
                 
         $scope.carregando = false;
         
-        dadosConta.username = user.username;  
-        dadosConta.password = user.password;                      
+        if(user.username) dadosConta.username = user.username;    
+        
+        if(user.password) dadosConta.password = user.password;        
+        
+        if(user.fbid) dadosConta.fbid = user.fbid;
+        
         dadosConta.isLogado = true;        
 
         Auth.set(dadosConta);
@@ -92,14 +100,72 @@ angular.module('proj.login', [])
           $location.path('/perfil/' + result.username);   
         }else{
           $location.path('/local');   
-        }
-
-        
+        }      
       })  
-
       .catch(function(result){
         $scope.carregando = false;  
         $scope.erro = 'usuário ou senha inválido';    
       })   
   }
+
+  $scope.showlogin = function(){
+    $scope.wait_callsession = 2;
+  }
+
+  $scope.callsession = function(){
+    $scope.wait_callsession = 1;
+    test_facesession();      
+  }
+
+  function test_facesession(){
+    
+    window.fbAsyncInit = function() {
+
+      FB.init({appId:'581702775331200', cookie:true, xfbml:true, version:'v2.2'});
+      
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {      
+          
+          FB.api('/me?fields=picture,name', function(response) {                    
+                        
+            var dadosConta = {};        
+            dadosConta.fbid = response.id;                      
+            dadosConta.isLogado = true;        
+
+            Auth.set(dadosConta); 
+
+            test_session();                                        
+          })
+        } else { 
+          test_session();             
+        }
+      });
+    };
+  }
+
+  function test_session(){
+    console.log('test_session');
+    if(Auth.get()){     
+      AuthService.confirmAuth()
+      .then(function(result){
+        if(result.isLogado){
+          $scope.wait_callsession = 3;          
+          $scope.usersession = result;
+          $scope.usersession.password = Auth.get().password; 
+        }else{
+          $scope.wait_callsession = 2;
+        }
+      })
+      .catch(function(result){
+        $scope.wait_callsession = 2;
+      })  
+    }else{
+      $scope.wait_callsession = 2;
+       
+    }
+
+    $scope.$apply();
+    
+  };
+
 })

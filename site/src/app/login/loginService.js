@@ -8,8 +8,15 @@ angular.module('proj.login')
 	return {
 
 		logar: function(userlogin){
+
+			var fbauth = '';
+
+			console.log(userlogin);
+			
+			if(userlogin.fbid) fbauth = 'f';
+
 			var d = $q.defer(),
-			url = serversocial + 'autenticar'
+			url = serversocial + 'autenticar' + fbauth;
 
 			$http.post(url, userlogin)
 			.success(function(result){

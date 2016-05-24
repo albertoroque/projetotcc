@@ -40,11 +40,14 @@ angular.module('Proj',[
 
       var dadosConta = Auth.get();
       
-      var user = {}
-      user.username = dadosConta.username;
-      user.password = dadosConta.password;  
-      
-      
+
+      if(dadosConta != null){
+        var user = {};    
+        user.username = dadosConta.username;
+        user.password = dadosConta.password;
+        user.fbid = dadosConta.fbid;  
+      }
+                
       LoginService.logar(user)
         .then(function(result){                                      
           result.isLogado = true;
@@ -105,7 +108,6 @@ angular.module('Proj',[
 
 .controller('SocialCtrl', function ($scope, $rootScope, $mdToast, $location, Auth, LoginService, AuthService) {
     
-  var dadosConta = {};
 
   $rootScope.toast = function(conteudo) {
     var position = {

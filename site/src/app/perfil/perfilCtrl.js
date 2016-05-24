@@ -38,6 +38,8 @@ angular.module('proj.perfil', [])
 		PerfilService.carregarPerfil(userRota)
 			.then(function(result){
 				$scope.dadosPerfil = result;
+
+				console.log(result);
 				$scope.images = result.posts;				
 				$scope.convertPlace(result.placeid);			
 				verificaStatus();

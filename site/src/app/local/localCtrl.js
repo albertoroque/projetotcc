@@ -11,7 +11,7 @@ angular.module('proj.local', [])
 })
 
 
-.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth, LoginService, PerfilService) {        
+.controller('LocalCtrl', function ($scope, $rootScope, $location, $mdDialog, Auth, LoginService, AuthService, PerfilService) {        
   
 	
 	$scope.dadosConta = {};
@@ -21,32 +21,18 @@ angular.module('proj.local', [])
 	var geocoder = new google.maps.Geocoder;
 
 	$scope.carregaPagina= function(){
-
-		$scope.dadosConta = Auth.get();
-
-        //console.log($scope.dadosConta);
-    
-		if($scope.dadosConta.isLogado){            
-
-            var user = {};
-            user.username = $scope.dadosConta.username;
-            user.password = $scope.dadosConta.password;
-
-            LoginService.logar(user)
-              .then(function(result){                
-                $scope.dadosPerfil = result;             
-
-              })  
-              .catch(function(result){
-                $scope.carregaPagina();
-              }) 
-
-		}else{
-            alert('Você não está logado!');
+		AuthService.confirmAuth()
+        .then(function(result){
+            $scope.dadosPerfil = result;
+            console.log($scope.dadosPerfil);
+            console.log(Auth.get());
+        })
+        .catch(function(result){
+            $rootScope.toast('Você não está logado!');
             $location.path('/login');
-        }	
-	}
-
+        })
+    }
+            
 	$scope.buscaLocal =  function(){
         console.log('disparada a busca de localização');
 		getLocation();
@@ -54,7 +40,7 @@ angular.module('proj.local', [])
 	}
 
     $scope.gotoPerfil = function(){
-        var page = 'perfil/' + $scope.dadosConta.username;
+        var page = 'perfil/' + Auth.get().username;
         $location.path(page);
     }
 
