@@ -28,23 +28,23 @@
     	class='thumbnail-img' 
     	src="http://www.extremetech.com/wp-content/uploads/2012/12/Audi-A1.jpg" />
 	</div>
+
 	<button id="crop">Crop</button>	
 
 
-	<div style="width:600px; height: 600px; background-color: red; ">
-		<canvas id="canvasThumbResult"></canvas>
+	<div style="width:600px; height: 300px; background-color: red; ">
+		<canvas id="canvas"></canvas>
 	</div>
 
-
-	<div style="width:600px; height: 600px; background-color: yellow; ">
-		<canvas id="preview"></canvas>
-	</div>
+	<img id="canvasImg">
 
 	<script>
 	// Create variables (in this scope) to hold the API and image size
 	var jcrop_api, boundx, boundy;
 
 	var coords;
+
+	var image = new Image();
 
 	function showCoords(c) { // show all coords	    
 	    coords = c;
@@ -54,16 +54,14 @@
 	    onSelect: showCoords,
 	    bgFade: true,
 	    bgOpacity: .3,	   
-	    aspectRatio: 1
-	},function(){
-	    	  
-      // Store the API in the jcrop_api variable
+	    aspectRatio: 4
+	},function(){	    	       
       jcrop_api = this;     
 	});
 
 	$("#crop").on("click", function(){
 	    
-	    var canvas = document.getElementById("canvasThumbResult");
+	    var canvas = document.getElementById("canvas");
 	    
 	    var context = canvas.getContext("2d");
 
@@ -75,23 +73,17 @@
 		    imgH = img.height;		   
 	    
 	    // TAMANHO DA IMAGEM ORIGINAL
-	    console.log('IMG W', imgW);
-	    console.log('IMG H', imgH);
+	    // console.log('IMG W', imgW);
+	    // console.log('IMG H', imgH);
 
-	    // TAMANHO DA IMAGEM NA DIV
-	    console.log('IMG DIV H', $img.height());
-	    console.log('IMG DIV W', $img.width());
+	    // // TAMANHO DA IMAGEM NA DIV
+	    // console.log('IMG SEL H', $img.height());
+	    // console.log('IMG SEL W', $img.width());
 	    
 	    var rY = imgH / $img.height(),
 	        rX = imgW / $img.width();
        
-        console.log(coords);	       		
-
-	    console.log('---------- COORDS COMPARE');
-	    console.log(coords.x * 3);
-	    console.log(coords.y * 3);
-	    console.log(coords.w * 3);
-	    console.log(coords.h * 3);	    
+        console.log(coords);       
 
 	    context.drawImage
 	    	(img, 
@@ -104,8 +96,16 @@
 	    	600, 
 	    	600);
 
-	    var dataUrl = canvas.toDataUrl();
-		console.log(dataUrl);
+	    console.log(context);
+	    	   	   
+    	// var data = context.getImageData(0, 0, canvas.width, canvas.height);
+    	
+    	var image = context.putImageData(0, 0, 100,100);
+
+	    console.log(data);
+
+	   	document.getElementById('canvasImg').src = data; 
+	    
 
 	});
 
