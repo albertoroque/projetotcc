@@ -11,107 +11,108 @@
 <body>
 	<style type="text/css">
 		
-		.thumbnail-img{
-			height: auto;
-		    width: 100%;		    		   
-		}
-
-		.img-canvas{
-			max-width: 500px;
-			width: 100%;
-			height: auto;		   
-		}
+		.thumbnail-img{height: auto;width: 100%;}
+		.img-canvas{width: 100%;height: auto;}
+		.img-canvas img{width: 100%;}		
 		
 	</style>
-	<div>    	
+	
+	<!-- div for cut -->
+	<div class="imgToThumb">    	
     	<img id="canvasToThumb" 
     	class='thumbnail-img' 
-    	src="http://www.extremetech.com/wp-content/uploads/2012/12/Audi-A1.jpg" />
+    	crossorigin="anonymous" 
+    	src="https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg" />
 	</div>
 
-	<button id="crop">Crop</button>	
 
+	<button id="loadJcrop">CORTAR</button>
+	<button id="crop">TERMINAR CORTE</button>	
+	<button id="hideJcrop">CANCELAR</button>
 
-	<div style="width:600px; height: 300px; background-color: red; ">
-		<canvas id="canvas"></canvas>
-	</div>
+	<p>obs: desabilitar botões</p>
 
-	<img id="canvasImg">
+	<!-- espaço para renderização de imagem -->
+	<div style="display:none;"><canvas id="canvas"></canvas></div>
+
+	<!-- preview da imagem -->
+	<div id="divimg" class="img-canvas"> </div>
 
 	<script>
 	// Create variables (in this scope) to hold the API and image size
 	var jcrop_api, boundx, boundy;
-
 	var coords;
 
-	var image = new Image();
+	var width_cropper = document.getElementById("canvasToThumb").width;
+
+	var canvas = document.getElementById("canvas");	   
+	var context = canvas.getContext("2d");
 
 	function showCoords(c) { // show all coords	    
 	    coords = c;
 	}
 
-	$('.thumbnail-img').Jcrop({	    
-	    onSelect: showCoords,
-	    bgFade: true,
-	    bgOpacity: .3,	   
-	    aspectRatio: 4
-	},function(){	    	       
-      jcrop_api = this;     
+	$("#loadJcrop").on("click", function(){			  
+		$('.thumbnail-img').Jcrop({	    
+		    onSelect: showCoords,
+		    bgFade: true,
+		    bgOpacity: .3,
+		    setSelect: [ width_cropper, 0, 0, 0 ],	   
+		    aspectRatio: 4
+		},function(){	    	       
+	      jcrop_api = this;     
+		});
+
+	});
+
+	$("#hideJcrop").on("click", function(){			  
+		hideJcrop();
+	});
+
+	function hideJcrop(){		
+		if(jcrop_api){
+			jcrop_api.destroy();
+			$('.imgToThumb .thumbnail-img').removeAttr('style');
+			$('.imgToThumb .jcrop-holder').remove();
+			width_cropper = document.getElementById("canvasToThumb").width;        		
+    	}
+	}
+
+	$(window).resize(function(){
+		hideJcrop();
+		console.log('RESIZE');	 
 	});
 
 	$("#crop").on("click", function(){
-	    
-	    var canvas = document.getElementById("canvas");
-	    
-	    var context = canvas.getContext("2d");
-
-	    //espaõ da imagem cortada
+	    	    
+	   	//espaõ da imagem cortada
 	    var img = document.getElementById("canvasToThumb"),
 	    	    	
 	    	$img = $(img),
 		    imgW = img.width, 
-		    imgH = img.height;		   
-	    
-	    // TAMANHO DA IMAGEM ORIGINAL
-	    // console.log('IMG W', imgW);
-	    // console.log('IMG H', imgH);
-
-	    // // TAMANHO DA IMAGEM NA DIV
-	    // console.log('IMG SEL H', $img.height());
-	    // console.log('IMG SEL W', $img.width());
+		   	imgH = img.height;	
 	    
 	    var rY = imgH / $img.height(),
 	        rX = imgW / $img.width();
        
-        console.log(coords);       
+        console.log(coords); 
 
-	    context.drawImage
-	    	(img, 
-	    	coords.x * rX, 
-	    	coords.y * rY, 
-	    	coords.w * rX, 
-	    	coords.h * rY, 
-	    	0, 
-	    	0, 
-	    	600, 
-	    	600);
+        canvas.width = coords.w;  
+        canvas.height =  coords.h;  
 
-	    console.log(context);
-	    	   	   
-    	// var data = context.getImageData(0, 0, canvas.width, canvas.height);
-    	
-    	var image = context.putImageData(0, 0, 100,100);
+	    context.drawImage(img, (coords.x * rX), (coords.y * rY), (coords.w * rX), (coords.h * rY), 0, 0, canvas.width, canvas.height);
 
-	    console.log(data);
+	    var img = new Image();
+		
+		img.setAttribute('crossOrigin', 'anonymous');
+		img.src = context.canvas.toDataURL("image/png");
 
-	   	document.getElementById('canvasImg').src = data; 
-	    
+	   	var divimg = document.getElementById('divimg');
 
+	   	divimg.innerHTML = ''; 
+	   	divimg.appendChild(img); 
+       	    	  	 
 	});
-
-
-	// document.getElementById('canvasImg').src = dataURL;
-
 	</script>
 </body>
 
