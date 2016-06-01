@@ -33,10 +33,7 @@
 	<p>obs: desabilitar botões</p>
 
 	<!-- espaço para renderização de imagem -->
-	<div style="display:none;"><canvas id="canvas"></canvas></div>
-
-	<!-- preview da imagem -->
-	<div id="divimg" class="img-canvas"> </div>
+	<div style="display:none;"><canvas id="canvas"></canvas></div>	
 
 	<script>
 	// Create variables (in this scope) to hold the API and image size
@@ -102,15 +99,17 @@
 
 	    context.drawImage(img, (coords.x * rX), (coords.y * rY), (coords.w * rX), (coords.h * rY), 0, 0, canvas.width, canvas.height);
 
-	    var img = new Image();
+	 	//var img = new Image();
 		
-		img.setAttribute('crossOrigin', 'anonymous');
+		// img.setAttribute('crossOrigin', 'anonymous');
+
+		hideJcrop();
 		img.src = context.canvas.toDataURL("image/png");
 
-	   	var divimg = document.getElementById('divimg');
+	   	// var divimg = document.getElementById('divimg');
 
-	   	divimg.innerHTML = ''; 
-	   	divimg.appendChild(img); 
+	   	// divimg.innerHTML = ''; 
+	   	// divimg.appendChild(img); 
        	    	  	 
 	});
 	</script>
