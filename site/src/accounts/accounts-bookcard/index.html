@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title></title>
+
+	<meta charset="UTF-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-blue.min.css">
+	<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+	
+	<style>
+
+		body{
+			padding: 0;
+			margin: 0;
+			background-color:#f5f5f5;
+		}
+
+		.accounts-main{
+			margin: 0 auto;
+			max-width: 700px;
+			width: 100%;			
+			color: #333;
+			text-align: center;	
+			margin-top: 5%;		
+		}
+
+		.accounts-head{
+			font-weight: 300 !important;
+			margin-bottom: 30px;
+			height: auto;	
+		}
+
+		.accounts-head-logo{
+			width: 100px;
+			height: 100px;
+			margin-top: 10px;
+			border-radius: 20%;
+			background-position: center;
+			background-size: 100% 100%;
+			margin: 0 auto;			
+		}
+
+		.accounts-head-text{
+			text-align: center;
+			padding-bottom: 35px;
+		}
+	
+
+		.accounts-box{						
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			margin-bottom: 30px;			
+		}
+
+		.accounts-box-row{
+			height: auto;			
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 5px;
+			margin-bottom: 30px;
+		}
+
+		.accounts-box-form{			
+			width: 100%;
+			margin-top: 10px;			
+		}
+
+		.accounts-link-cadastro{
+			text-decoration: none;
+			cursor: pointer;
+			margin: 0 auto;
+			position: relative;
+		}
+
+		.accounts-link{
+			text-decoration: none;
+			width: 100%;
+			text-align: center;
+		}
+
+		.accounts-box-form a{					
+			padding-top: 30px;
+			font-size: 14px;
+			text-decoration: none;
+			color: #888;
+		}
+
+		.accounts-box-form .mdl-textfield{
+			width: 90%;
+		}
+
+		.accounts-box-form-button{			
+			width: 90%;
+			margin: 10px;			
+		}
+
+		@media screen and (max-width: 600px) {
+			.accounts-box{
+				padding: 10px;
+			}
+			.accounts-head-text{
+				font-size: 24px;
+				padding-bottom: 5px;
+				margin-bottom: 2px;
+			}
+			.accounts-head-text-sub{
+				display: none;	
+			}
+		}
+
+	</style>
+</head>
+<body>
+
+	<main class="mdl-layout mdl-js-layout">
+				
+		 <div class="accounts-main">
+
+			 <div class="accounts-head">			 
+			 	<!-- LOGO DA APLICAÇÃO -->
+				<div class="accounts-head-logo mdl-shadow--2dp" style="background-image:url('http://mybookcard.com/img/logoezquad.png');"></div>
+
+				<!-- MSG DA APLICAÇÃO -->
+				<h3 class="display-1 accounts-head-text">Onde vendedores e compradores se encontram</h3>
+
+				<!--AÇÃO DA APLICAÇÃO -->
+				<h5 class="accounts-head-text-sub">Faça login com sua conta do EstoqueZero</h5>
+			</div>
+
+			<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--2dp accounts-box">
+				<form class="accounts-box-form">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					    <input class="mdl-textfield__input" type="text" rows="1">
+					    <label class="mdl-textfield__label" for="sample3">nome da conta ou email</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					    <input class="mdl-textfield__input" type="password" rows="1">
+					    <label class="mdl-textfield__label" for="sample3">senha</label>
+					</div>
+					<br>
+
+					<!-- REDIRECIONA PARA APLICAÇÃO -->
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored accounts-box-form-button mdl-js-ripple-effect">
+					  entrar
+					</button>
+
+					<!-- LINK PARA CADASTRO DA APLICAÇÃO -->
+					<button class="mdl-button mdl-js-button mdl-button--raised  accounts-box-form-button mdl-js-ripple-effect">
+					  cadastrar
+					</button>
+					<br><br>
+					<a href="#">Esqueceu a senha?</a>					
+				</form>
+			</div>		 	
+		 </div>
+	</main>
+
+</body>
+</html>
