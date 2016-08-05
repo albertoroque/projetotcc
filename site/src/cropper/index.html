@@ -7,27 +7,82 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.Jcrop.js"></script>	
 	<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+
+	<style type="text/css">
+		.crop-body{
+			background-color: #fafbfe;
+			margin: 0;
+			padding: 0;
+			font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+		}
+
+		.crop-main{
+			width: 100%;
+			max-width: 700px;
+			height: 100%;			
+			max-height: 700px;
+			margin: 0 auto;
+			margin-top: 10%;
+			padding: 10px;
+			background-color: white;
+			border-radius: 4px;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
+
+		.crop-img{
+			width: 100%;			
+		}
+
+		button{			
+			-moz-box-shadow: 0px 0px 0px 0px #3dc21b;
+			-webkit-box-shadow: 0px 0px 0px 0px #3dc21b;
+			box-shadow: 0px 0px 0px 0px #3dc21b;
+			background-color:#aaa;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
+			border-radius:3px;
+			display:inline-block;
+			cursor:pointer;
+			color:#ffffff;
+			font-family:Arial;
+			font-size:14px;
+			padding:10px 15px;
+			text-decoration:none;
+			outline: none;
+			border: none;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		}
+
+	</style>
 </head>
-<body>
-		
+
+<body class="crop-body">		
 	<!-- div for cut -->
-	<div class="imgToThumb">    	
-    	<img id="canvasToThumb" 
-    	class='thumbnail-img' 
-    	crossorigin="anonymous" 
-    	style="height: auto;width: 100%;" 
-    	src="https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg" />
-	</div>
+	<main class="crop-main">
 
+		<div class="imgToThumb">    	    	
+    		
+    		<img id="canvasToThumb" 
+	    		class="thumbnail-img crop-img"
+	    		crossorigin="anonymous" 
+	    		style="height: auto;width: 100%;" 
+	    		src="https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg" 
+	    	/>
 
-	<button id="loadJcrop">CORTAR</button>
-	<button id="crop">TERMINAR CORTE</button>	
-	<button id="hideJcrop">CANCELAR</button>
+		</div>	
 
-	<p>obs: desabilitar botões</p>
+		</br>
 
-	<!-- espaço para renderização de imagem -->
-	<div style="display:none;"><canvas id="canvas"></canvas></div>	
+		<button id="loadJcrop">EDITAR</button>
+		<button id="crop">CORTAR</button>	
+		<button id="hideJcrop">CANCELAR</button>	
+
+		<!-- espaço para renderização de imagem -->
+		<div style="display:none;">
+			<canvas id="canvas"></canvas>
+		</div>	
+
+	</main>
 
 	<script>
 	// Create variables (in this scope) to hold the API and image size
