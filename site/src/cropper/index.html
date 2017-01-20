@@ -60,15 +60,13 @@
 	<!-- div for cut -->
 	<main class="crop-main">
 
-		<div class="imgToThumb">    	    	
-    		
+		<div class="imgToThumb">    	    	    		
     		<img id="canvasToThumb" 
 	    		class="thumbnail-img crop-img"
 	    		crossorigin="anonymous" 
 	    		style="height: auto;width: 100%;" 
 	    		src="https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg" 
 	    	/>
-
 		</div>	
 
 		</br>
@@ -98,6 +96,8 @@
 	    coords = c;
 	}
 
+
+	//CARREGA JCROP
 	$("#loadJcrop").on("click", function(){			  
 		$('.thumbnail-img').Jcrop({	    
 		    onSelect: showCoords,
@@ -111,10 +111,13 @@
 
 	});
 
+	//FUNCTION: ESCONDE EDIÇÃO COM AÇÃO DO BOTÃO
 	$("#hideJcrop").on("click", function(){			  
 		hideJcrop();
 	});
 
+
+	//FUNCTION: ESCONDE FERRRAMENTA DE EDIÇÃO
 	function hideJcrop(){		
 		if(jcrop_api){
 			jcrop_api.destroy();
@@ -124,14 +127,14 @@
     	}
 	}
 
+	//FUNCTION:ON RESIZE DESLIGA A FERRAMENTA DE EDIÇÃO
 	$(window).resize(function(){
 		hideJcrop();
 		console.log('RESIZE');	 
 	});
 
 	$("#crop").on("click", function(){
-	    	    
-	   	//espaõ da imagem cortada
+	    	    	   
 	    var img = document.getElementById("canvasToThumb"),
 	    	    	
 	    	$img = $(img),
@@ -148,19 +151,86 @@
 
 	    context.drawImage(img, (coords.x * rX), (coords.y * rY), (coords.w * rX), (coords.h * rY), 0, 0, canvas.width, canvas.height);
 
-	 	//var img = new Image();
-		
-		// img.setAttribute('crossOrigin', 'anonymous');
-
 		hideJcrop();
-		img.src = context.canvas.toDataURL("image/png");
 
-	   	// var divimg = document.getElementById('divimg');
 
-	   	// divimg.innerHTML = ''; 
-	   	// divimg.appendChild(img); 
+		var dataURI = context.canvas.toDataURL("image/jpg");
+		
+		img.src = dataURI;
+
+	   	//{ todo }
+	   	// 1 - converter imagem para FILE BLOB com function dataURItoBlob(this.dataURI) 
+	   	// 2 - enviar retorno de dataURItoBlob para uploadImage(fileBlob)
        	    	  	 
 	});
+
+
+	//{ TODO }
+	//SEND IMAGE FROM SERVER
+	function uploadImage (fileBlob){
+				
+	
+		//FORM DATA
+	    var data = new FormData();
+	    data.append("file", fileBlob);
+
+	    //STATIC S9
+	    fileUploaderUrl = fileUploaderUrl + "?token=" + token;
+
+	    //AJAX UP IMG
+	    $.ajax({
+	        type: "POST",
+	        url: fileUploaderUrl,
+	        contentType: false,
+	        processData: false,
+	        cache: false,
+	        data: data, //imagem renderizada
+	        success: function (messages) {
+	            var str_filename = ""
+	            for (i = 0; i < messages.length; i++) {
+	                str_filename = messages[i].Path;
+	            }
+
+	            $.getJSON(urlPreview,
+	                {
+	                    idCard: card.val(),
+	                    filename: str_filename,
+	                    jsonResult: true
+	                },
+	                function (data) {
+	                    presentationDefinitionContent.html(data.message);
+	                });
+	        },
+	        error: function (jqXHR, textStatus, err) {
+	            console.log(jqXHR);
+	            console.log(textStatus);
+	            console.log(err);	           
+	        }
+	    });
+	}
+
+
+	function dataURItoBlob(dataURI) {
+	    // convert base64/URLEncoded data component to raw binary data held in a string
+	    var byteString;
+	    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+	        byteString = atob(dataURI.split(',')[1]);
+	    else
+	        byteString = unescape(dataURI.split(',')[1]);
+
+	    // separate out the mime component
+	    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+	    // write the bytes of the string to a typed array
+	    var ia = new Uint8Array(byteString.length);
+	    for (var i = 0; i < byteString.length; i++) {
+	        ia[i] = byteString.charCodeAt(i);
+	    }
+
+	    return new Blob([ia], {type:mimeString});
+	}
+
+
 	</script>
 </body>
 
