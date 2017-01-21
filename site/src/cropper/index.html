@@ -1,238 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-	
+	<title>CROPPER</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />	
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.Jcrop.js"></script>	
 	<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
-
-	<style type="text/css">
-		.crop-body{
-			background-color: #fafbfe;
-			margin: 0;
-			padding: 0;
-			font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
-		}
-
-		.crop-main{
-			width: 100%;
-			max-width: 700px;
-			height: 100%;			
-			max-height: 700px;
-			margin: 0 auto;
-			margin-top: 10%;
-			padding: 10px;
-			background-color: white;
-			border-radius: 4px;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-		}
-
-		.crop-img{
-			width: 100%;			
-		}
-
-		button{			
-			-moz-box-shadow: 0px 0px 0px 0px #3dc21b;
-			-webkit-box-shadow: 0px 0px 0px 0px #3dc21b;
-			box-shadow: 0px 0px 0px 0px #3dc21b;
-			background-color:#aaa;
-			-moz-border-radius:3px;
-			-webkit-border-radius:3px;
-			border-radius:3px;
-			display:inline-block;
-			cursor:pointer;
-			color:#ffffff;
-			font-family:Arial;
-			font-size:14px;
-			padding:10px 15px;
-			text-decoration:none;
-			outline: none;
-			border: none;
-			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-		}
-
-	</style>
+	<link rel="stylesheet" href="style.css" /> 
+	<script src="jcropper.js"></script>  
 </head>
-
 <body class="crop-body">		
 	<!-- div for cut -->
 	<main class="crop-main">
-
 		<div class="imgToThumb">    	    	    		
     		<img id="canvasToThumb" 
-	    		class="thumbnail-img crop-img"
-	    		crossorigin="anonymous" 
+	    		class="thumbnail-img crop-img"	    		
 	    		style="height: auto;width: 100%;" 
-	    		src="https://static.pexels.com/photos/2324/skyline-buildings-new-york-skyscrapers.jpg" 
-	    	/>
+	    		src="img/1.jpg" />
 		</div>	
-
 		</br>
-
 		<button id="loadJcrop">EDITAR</button>
 		<button id="crop">CORTAR</button>	
-		<button id="hideJcrop">CANCELAR</button>	
+		<button id="hideJcrop">CANCELAR</button>
+
+		<button id="sendImage" class="btn-send" >ENVIAR</button>
 
 		<!-- espaço para renderização de imagem -->
 		<div style="display:none;">
 			<canvas id="canvas"></canvas>
-		</div>	
-
+		</div>
 	</main>
 
-	<script>
-	// Create variables (in this scope) to hold the API and image size
-	var jcrop_api, boundx, boundy;
-	var coords;
-
-	var width_cropper = document.getElementById("canvasToThumb").width;
-
-	var canvas = document.getElementById("canvas");	   
-	var context = canvas.getContext("2d");
-
-	function showCoords(c) { // show all coords	    
-	    coords = c;
-	}
-
-
-	//CARREGA JCROP
-	$("#loadJcrop").on("click", function(){			  
-		$('.thumbnail-img').Jcrop({	    
-		    onSelect: showCoords,
-		    bgFade: true,
-		    bgOpacity: .3,
-		    setSelect: [ width_cropper, 0, 0, 0 ],	   
-		    aspectRatio: 4
-		},function(){	    	       
-	      jcrop_api = this;     
-		});
-
-	});
-
-	//FUNCTION: ESCONDE EDIÇÃO COM AÇÃO DO BOTÃO
-	$("#hideJcrop").on("click", function(){			  
-		hideJcrop();
-	});
-
-
-	//FUNCTION: ESCONDE FERRRAMENTA DE EDIÇÃO
-	function hideJcrop(){		
-		if(jcrop_api){
-			jcrop_api.destroy();
-			$('.imgToThumb .thumbnail-img').removeAttr('style');
-			$('.imgToThumb .jcrop-holder').remove();
-			width_cropper = document.getElementById("canvasToThumb").width;        		
-    	}
-	}
-
-	//FUNCTION:ON RESIZE DESLIGA A FERRAMENTA DE EDIÇÃO
-	$(window).resize(function(){
-		hideJcrop();
-		console.log('RESIZE');	 
-	});
-
-	$("#crop").on("click", function(){
-	    	    	   
-	    var img = document.getElementById("canvasToThumb"),
-	    	    	
-	    	$img = $(img),
-		    imgW = img.width, 
-		   	imgH = img.height;	
-	    
-	    var rY = imgH / $img.height(),
-	        rX = imgW / $img.width();
-       
-        console.log(coords); 
-
-        canvas.width = coords.w;  
-        canvas.height =  coords.h;  
-
-	    context.drawImage(img, (coords.x * rX), (coords.y * rY), (coords.w * rX), (coords.h * rY), 0, 0, canvas.width, canvas.height);
-
-		hideJcrop();
-
-
-		var dataURI = context.canvas.toDataURL("image/jpg");
-		
-		img.src = dataURI;
-
-	   	//{ todo }
-	   	// 1 - converter imagem para FILE BLOB com function dataURItoBlob(this.dataURI) 
-	   	// 2 - enviar retorno de dataURItoBlob para uploadImage(fileBlob)
-       	    	  	 
-	});
-
-
-	//{ TODO }
-	//SEND IMAGE FROM SERVER
-	function uploadImage (fileBlob){
-				
-	
-		//FORM DATA
-	    var data = new FormData();
-	    data.append("file", fileBlob);
-
-	    //STATIC S9
-	    fileUploaderUrl = fileUploaderUrl + "?token=" + token;
-
-	    //AJAX UP IMG
-	    $.ajax({
-	        type: "POST",
-	        url: fileUploaderUrl,
-	        contentType: false,
-	        processData: false,
-	        cache: false,
-	        data: data, //imagem renderizada
-	        success: function (messages) {
-	            var str_filename = ""
-	            for (i = 0; i < messages.length; i++) {
-	                str_filename = messages[i].Path;
-	            }
-
-	            $.getJSON(urlPreview,
-	                {
-	                    idCard: card.val(),
-	                    filename: str_filename,
-	                    jsonResult: true
-	                },
-	                function (data) {
-	                    presentationDefinitionContent.html(data.message);
-	                });
-	        },
-	        error: function (jqXHR, textStatus, err) {
-	            console.log(jqXHR);
-	            console.log(textStatus);
-	            console.log(err);	           
-	        }
-	    });
-	}
-
-
-	function dataURItoBlob(dataURI) {
-	    // convert base64/URLEncoded data component to raw binary data held in a string
-	    var byteString;
-	    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-	        byteString = atob(dataURI.split(',')[1]);
-	    else
-	        byteString = unescape(dataURI.split(',')[1]);
-
-	    // separate out the mime component
-	    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-	    // write the bytes of the string to a typed array
-	    var ia = new Uint8Array(byteString.length);
-	    for (var i = 0; i < byteString.length; i++) {
-	        ia[i] = byteString.charCodeAt(i);
-	    }
-
-	    return new Blob([ia], {type:mimeString});
-	}
-
-
-	</script>
+	<div>
+		<button onclick="console.log($('#canvasToThumb'));">canvas</button>
+	</div>
 </body>
-
-
 </html>
